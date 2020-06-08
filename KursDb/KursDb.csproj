@@ -71,6 +71,37 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="View\FittingsPage.xaml.cs">
+      <DependentUpon>FittingsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\PatternPage.xaml.cs">
+      <DependentUpon>PatternPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ShoeModelPage.xaml.cs">
+      <DependentUpon>ShoeModelPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ShoeTreePage.xaml.cs">
+      <DependentUpon>ShoeTreePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\SolePage.xaml.cs">
+      <DependentUpon>SolePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\UpBilletPage.xaml.cs">
+      <DependentUpon>UpBilletPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="VM\DownBilletVM.cs" />
+    <Page Include="View\DownBilletPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\FittingsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\InsolePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -91,10 +122,40 @@
     <Compile Include="Model\Tables\Sole.cs" />
     <Compile Include="Model\Tables\UpBillet.cs" />
     <Compile Include="Model\UserDbContext.cs" />
+    <Compile Include="View\DownBilletPage.xaml.cs">
+      <DependentUpon>DownBilletPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\InsolePage.xaml.cs">
+      <DependentUpon>InsolePage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="View\PatternPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Resources\Default.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ShoeModelPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ShoeTreePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\SolePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\UpBilletPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -123,8 +184,9 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="VM\" />
+    <Resource Include="08-06-2020 14-56-45.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

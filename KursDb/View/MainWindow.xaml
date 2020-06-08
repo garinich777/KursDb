@@ -7,11 +7,8 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800"
         WindowStartupLocation="CenterScreen">
-    
+
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="60*"/>
-            <ColumnDefinition Width="330*"/>
-        </Grid.ColumnDefinitions>    
+        <Frame Content="{Binding CorentPage}" NavigationUIVisibility="Hidden"/>
     </Grid>
 </Window>
