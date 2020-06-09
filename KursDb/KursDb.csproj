@@ -97,6 +97,7 @@
     <Compile Include="VM\SexEnum.cs" />
     <Compile Include="VM\ShoeTreeVM.cs" />
     <Compile Include="VM\SoleVM.cs" />
+    <Compile Include="VM\UpBilletVM.cs" />
     <Page Include="View\DownBilletPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

@@ -8,7 +8,29 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="UpBilletPage">
 
-    <Grid>
-        
+    <Grid Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="371*"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="180"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="140"/>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel>
+            <Label Content="Название материал"/>
+            <Label Content="Цена за м², руб"/>
+            <Label Content="Плотность ткани, г/м²"/>
+        </StackPanel>
+
+        <StackPanel Grid.Column="1">
+            <TextBox Text="{Binding Material}"/>
+            <TextBox Text="{Binding Price}"/>
+            <TextBox Text="{Binding Density}"/>
+        </StackPanel>
+
+        <Button Command="{Binding ButtonCommand}" x:Name="bt_add_mod" Content="Добавить/изменить" Grid.Column="2" Grid.Row="1"/>
     </Grid>
 </Page>
