@@ -93,8 +93,10 @@
     <Compile Include="VM\FittingsVM.cs" />
     <Compile Include="VM\InsoleVM.cs" />
     <Compile Include="VM\PatternVM.cs" />
+    <Compile Include="VM\SeasonEnum.cs" />
     <Compile Include="VM\SexEnum.cs" />
     <Compile Include="VM\ShoeTreeVM.cs" />
+    <Compile Include="VM\SoleVM.cs" />
     <Page Include="View\DownBilletPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
