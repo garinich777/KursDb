@@ -26,8 +26,8 @@
         </StackPanel>
 
         <StackPanel Grid.Column="1">
-            <TextBox />
-            <TextBox />
+            <TextBox Text="{Binding Price}"/>
+            <TextBox Text="{Binding Size}"/>
             <ComboBox SelectedIndex="{Binding SelectedSex}">
                 <TextBlock Text="Мужские"/>
                 <TextBlock Text="Женские"/>
