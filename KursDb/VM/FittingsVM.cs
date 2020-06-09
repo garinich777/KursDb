@@ -6,24 +6,22 @@ using System.Windows.Input;
 
 namespace KursDb.VM
 {
-    public class DownBilletVM : ViewModelBase
+    public class FittingsVM
     {
-        string Material { get; set; }
+        string Type { get; set; }
         int Price { get; set; }
-        int Density { get; set; }
 
         public bool IsHaveValues;
 
-        public DownBilletVM()
+        public FittingsVM()
         {
             IsHaveValues = false;
         }
 
-        public DownBilletVM(DownBillet down_billet)
+        public FittingsVM(Fitting down_billet)
         {
-            Material = down_billet.Material;
+            Type = down_billet.Type;
             Price = down_billet.Price;
-            Density = down_billet.Density;
             IsHaveValues = true;
         }
 
@@ -35,14 +33,13 @@ namespace KursDb.VM
                 {
                     using (var context = new UserDbContext())
                     {
-                        var down_billet = new DownBillet()
+                        var fitting = new Fitting()
                         {
-                            Material = Material,
+                            Type = Type,
                             Price = Price,
-                            Density = Density
                         };
 
-                        context.DownBillets.Add(down_billet);
+                        context.Fittings.Add(fitting);
                         context.SaveChanges();
                         MessageBox.Show("Запись добавлена");
                     }
@@ -58,18 +55,16 @@ namespace KursDb.VM
                 {
                     using (var context = new UserDbContext())
                     {
-                        var down_billet = new DownBillet()
+                        var fitting = new Fitting()
                         {
-                            Material = Material,
+                            Type = Type,
                             Price = Price,
-                            Density = Density
                         };
 
-                        down_billet = context.DownBillets.Find(down_billet.Id);
+                        fitting = context.Fittings.Find(fitting.Id);
 
-                        down_billet.Material = Material;
-                        down_billet.Price = Price;
-                        down_billet.Density = Density;
+                        fitting.Type = Type;
+                        fitting.Price = Price;
 
                         context.SaveChanges();
                         MessageBox.Show("Запись изменена");

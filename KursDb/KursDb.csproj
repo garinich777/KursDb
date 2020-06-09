@@ -90,6 +90,7 @@
       <DependentUpon>UpBilletPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="VM\DownBilletVM.cs" />
+    <Compile Include="VM\FittingsVM.cs" />
     <Page Include="View\DownBilletPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

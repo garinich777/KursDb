@@ -1,4 +1,6 @@
-﻿using System;
+﻿using KursDb.Model.Tables;
+using KursDb.VM;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,14 +17,24 @@ using System.Windows.Shapes;
 
 namespace KursDb.View
 {
-    /// <summary>
-    /// Логика взаимодействия для DownBilletPage.xaml
-    /// </summary>
     public partial class DownBilletPage : Page
     {
-        public DownBilletPage()
+        ICommand ButtonCommand;
+
+        public DownBilletPage(DownBilletVM VM)
         {
             InitializeComponent();
+            DataContext = VM;
+            if (VM.IsHaveValues)
+            {
+                ButtonCommand = VM.ModCommand;
+                bt_add_mod.Content = "Изменить";                
+            }
+            else
+            {
+                ButtonCommand = VM.AddCommand;
+                bt_add_mod.Content = "Добавить";
+            }
         }
     }
 }
