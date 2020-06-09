@@ -8,7 +8,33 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="ShoeTreePage">
 
-    <Grid>
-        
+    <Grid Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="371*"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="180"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="140"/>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel>
+            <Label Content="Тип"/>
+            <Label Content="Размер"/>
+            <Label Content="Пол"/>
+        </StackPanel>
+
+        <StackPanel Grid.Column="1">
+            <TextBox Text="{Binding Tyep}"/>
+            <TextBox Text="{Binding Size}"/>
+            <ComboBox SelectedIndex="{Binding SelectedSex}">
+                <TextBlock Text="Мужские"/>
+                <TextBlock Text="Женские"/>
+                <TextBlock Text="Детские"/>
+            </ComboBox>
+        </StackPanel>
+
+        <Button Command="{Binding ButtonCommand}" x:Name="bt_add_mod" Content="Добавить/изменить" Grid.Column="2" Grid.Row="1"/>
     </Grid>
 </Page>

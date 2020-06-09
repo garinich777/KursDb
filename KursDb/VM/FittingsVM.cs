@@ -6,7 +6,7 @@ using System.Windows.Input;
 
 namespace KursDb.VM
 {
-    public class FittingsVM
+    public class FittingsVM : ViewModelBase
     {
         string Type { get; set; }
         int Price { get; set; }

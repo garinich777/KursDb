@@ -6,7 +6,7 @@ using System.Windows.Input;
 
 namespace KursDb.VM
 {
-    public class InsoleVM
+    public class InsoleVM : ViewModelBase
     {
         int SelectedSex
         {

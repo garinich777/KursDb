@@ -4,9 +4,10 @@ using KursDb.Model.Tables;
 using System.Windows;
 using System.Windows.Input;
 
+
 namespace KursDb.VM
 {
-    public class PatternVM : ViewModelBase
+    public class ShoeTreeVM : ViewModelBase
     {
         int SelectedSex
         {
@@ -43,25 +44,23 @@ namespace KursDb.VM
                 }
             }
         }
+        string Type { get; set; }
         string Sex { get; set; }
         int Size { get; set; }
-        int Square { get; set; }
-        int Сomplexity { get; set; }
 
         public bool IsHaveValues;
 
-        public PatternVM()
+        public ShoeTreeVM()
         {
             Sex = string.Empty;
             IsHaveValues = false;
         }
 
-        public PatternVM(Pattern el)
+        public ShoeTreeVM(ShoeTree el)
         {
+            Type = el.Type;
             Sex = el.Sex;
             Size = el.Size;
-            Square = el.Square;
-            Сomplexity = el.Сomplexity;
             IsHaveValues = true;
         }
 
@@ -73,15 +72,14 @@ namespace KursDb.VM
                 {
                     using (var context = new UserDbContext())
                     {
-                        var el = new Pattern()
+                        var el = new ShoeTree()
                         {
+                            Type = Type,
                             Sex = Sex,
                             Size = Size,
-                            Square = Square,
-                            Сomplexity = Сomplexity
                         };
 
-                        context.Patterns.Add(el);
+                        context.ShoeTrees.Add(el);
                         context.SaveChanges();
                         MessageBox.Show("Запись добавлена");
                     }
@@ -97,20 +95,18 @@ namespace KursDb.VM
                 {
                     using (var context = new UserDbContext())
                     {
-                        var el = new Pattern()
+                        var el = new ShoeTree()
                         {
+                            Type = Type,
                             Sex = Sex,
                             Size = Size,
-                            Square = Square,
-                            Сomplexity = Сomplexity
                         };
 
-                        el = context.Patterns.Find(el.Id);
+                        el = context.ShoeTrees.Find(el.Id);
 
+                        Type = Type;
                         Sex = Sex;
                         Size = Size;
-                        Square = Square;
-                        Сomplexity = Сomplexity;
 
                         context.SaveChanges();
                         MessageBox.Show("Запись изменена");
