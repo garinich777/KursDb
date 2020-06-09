@@ -91,6 +91,9 @@
     </Compile>
     <Compile Include="VM\DownBilletVM.cs" />
     <Compile Include="VM\FittingsVM.cs" />
+    <Compile Include="VM\InsoleVM.cs" />
+    <Compile Include="VM\PatternVM.cs" />
+    <Compile Include="VM\SexEnum.cs" />
     <Page Include="View\DownBilletPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
