@@ -77,6 +77,9 @@
     <Compile Include="View\LoginWindow.xaml.cs">
       <DependentUpon>LoginWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\ModelConstructorPage.xaml.cs">
+      <DependentUpon>ModelConstructorPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\PatternPage.xaml.cs">
       <DependentUpon>PatternPage.xaml</DependentUpon>
     </Compile>
@@ -148,6 +151,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="View\ModelConstructorPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\PatternPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

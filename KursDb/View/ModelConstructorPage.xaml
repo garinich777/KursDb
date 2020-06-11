@@ -1,0 +1,97 @@
+﻿<Page x:Class="KursDb.View.ModelConstructorPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:KursDb.View"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="ModelConstructorPage">
+
+    <Grid Background="White">
+        <DockPanel HorizontalAlignment="Right" VerticalAlignment="Top">            
+            <Button Content="Удалить" Height="35" Width="120" Margin="3 3 3 0" Style="{StaticResource RedButton}"/>
+            <Button Content="Изменить" Height="35" Width="120" Margin="3 3 3 0" Style="{StaticResource RedButton}"/>
+            <Button Content="Добавить" Height="35" Width="120" Margin="3 3 3 0"/>
+        </DockPanel>
+
+        <TabControl x:Name="tc_tabs" Margin="0 40 0 0" FontSize="16">
+            <TabItem Header="Подкладочный материал">
+                <Grid Background="#FFE5E5E5">
+                    <DataGrid x:Name="dg_down_billet" SelectionMode="Single" ItemsSource="{Binding DownBillet}" IsReadOnly="True" AutoGenerateColumns="False">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Артикул" Binding="{Binding Path=Id}"/>
+                            <DataGridTextColumn Header="Материал" Binding="{Binding Path=Material}"/>
+                            <DataGridTextColumn Header="Цена за м², руб" Binding="{Binding Path=Price}"/>
+                            <DataGridTextColumn Header="Плотность ткани, г/м²" Binding="{Binding Path=Density}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Загатовка верха обуви">
+                <Grid Background="#FFE5E5E5">
+                    <DataGrid x:Name="dg_up_billet" SelectionMode="Single" ItemsSource="{Binding UpBillet}" IsReadOnly="True" AutoGenerateColumns="False">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Артикул" Binding="{Binding Path=Id}"/>
+                            <DataGridTextColumn Header="Материал" Binding="{Binding Path=Material}"/>
+                            <DataGridTextColumn Header="Цена за м², руб" Binding="{Binding Path=Price}"/>
+                            <DataGridTextColumn Header="Плотность ткани, г/м²" Binding="{Binding Path=Density}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Стелька">
+                <Grid Background="#FFE5E5E5">
+                    <DataGrid x:Name="dg_insole" SelectionMode="Single" ItemsSource="{Binding Insole}" IsReadOnly="True" AutoGenerateColumns="False">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Артикул" Binding="{Binding Path=Id}"/>
+                            <DataGridTextColumn Header="Пол" Binding="{Binding Path=Sex}"/>
+                            <DataGridTextColumn Header="Размер" Binding="{Binding Path=Size}"/>
+                            <DataGridTextColumn Header="Цена за пару" Binding="{Binding Path=Price}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Выкройка">
+                <Grid Background="#FFE5E5E5">
+                    <DataGrid x:Name="dg_pattern" SelectionMode="Single" ItemsSource="{Binding Pattern}" IsReadOnly="True" AutoGenerateColumns="False">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Артикул" Binding="{Binding Path=Id}"/>
+                            <DataGridTextColumn Header="Пол" Binding="{Binding Path=Sex}"/>
+                            <DataGridTextColumn Header="Размер" Binding="{Binding Path=Size}"/>
+                            <DataGridTextColumn Header="Площадь выкройки м²" Binding="{Binding Path=Square}"/>
+                            <DataGridTextColumn Header="Сложность" Binding="{Binding Path=Сomplexity}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Выкройка">
+                <Grid Background="#FFE5E5E5">
+                    <DataGrid x:Name="dg_shoe_tree" SelectionMode="Single" ItemsSource="{Binding ShoeTree}" IsReadOnly="True" AutoGenerateColumns="False">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Артикул" Binding="{Binding Path=Id}"/>
+                            <DataGridTextColumn Header="Пол" Binding="{Binding Path=Sex}"/>
+                            <DataGridTextColumn Header="Размер" Binding="{Binding Path=Size}"/>
+                            <DataGridTextColumn Header="Тип" Binding="{Binding Path=Type}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Подошва">
+                <Grid Background="#FFE5E5E5">
+                    <DataGrid x:Name="dg_sole" SelectionMode="Single" ItemsSource="{Binding Sole}" IsReadOnly="True" AutoGenerateColumns="False">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Артикул" Binding="{Binding Path=Id}"/>
+                            <DataGridTextColumn Header="Пол" Binding="{Binding Path=Sex}"/>
+                            <DataGridTextColumn Header="Размер" Binding="{Binding Path=Size}"/>
+                            <DataGridTextColumn Header="Тип" Binding="{Binding Path=Type}"/>
+                            <DataGridTextColumn Header="Цена за пару" Binding="{Binding Path=Price}"/>
+                            <DataGridTextColumn Header="Сезон" Binding="{Binding Path=Season}"/>
+                            
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Page>

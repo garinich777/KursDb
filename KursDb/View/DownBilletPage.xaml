@@ -20,7 +20,7 @@
         </Grid.ColumnDefinitions>
         
         <StackPanel>
-            <Label Content="Название материал"/>
+            <Label Content="Материал"/>
             <Label Content="Цена за м², руб"/>
             <Label Content="Плотность ткани, г/м²"/>
         </StackPanel>

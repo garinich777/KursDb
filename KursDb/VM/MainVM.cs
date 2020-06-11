@@ -27,7 +27,7 @@ namespace KursDb.VM
 
         public MainVM()
         {
-            CorentPage = new DownBilletPage(new DownBilletVM());
+            CorentPage = new ModelConstructorPage();
             Visibility = Visibility.Collapsed;
         }
     }
