@@ -74,6 +74,9 @@
     <Compile Include="View\FittingsPage.xaml.cs">
       <DependentUpon>FittingsPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\LoginWindow.xaml.cs">
+      <DependentUpon>LoginWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\PatternPage.xaml.cs">
       <DependentUpon>PatternPage.xaml</DependentUpon>
     </Compile>
@@ -92,6 +95,7 @@
     <Compile Include="VM\DownBilletVM.cs" />
     <Compile Include="VM\FittingsVM.cs" />
     <Compile Include="VM\InsoleVM.cs" />
+    <Compile Include="VM\MainVM.cs" />
     <Compile Include="VM\PatternVM.cs" />
     <Compile Include="VM\SeasonEnum.cs" />
     <Compile Include="VM\SexEnum.cs" />
@@ -107,6 +111,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\InsolePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\LoginWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

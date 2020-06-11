@@ -20,11 +20,11 @@ namespace KursDb.VM
             IsHaveValues = false;
         }
 
-        public UpBilletVM(DownBillet down_billet)
+        public UpBilletVM(DownBillet el)
         {
-            Material = down_billet.Material;
-            Price = down_billet.Price;
-            Density = down_billet.Density;
+            Material = el.Material;
+            Price = el.Price;
+            Density = el.Density;
             IsHaveValues = true;
         }
 
@@ -36,14 +36,14 @@ namespace KursDb.VM
                 {
                     using (var context = new UserDbContext())
                     {
-                        var down_billet = new UpBillet()
+                        var el = new UpBillet()
                         {
                             Material = Material,
                             Price = Price,
                             Density = Density
                         };
 
-                        context.UpBillets.Add(down_billet);
+                        context.UpBillets.Add(el);
                         context.SaveChanges();
                         MessageBox.Show("Запись добавлена");
                     }
@@ -59,18 +59,18 @@ namespace KursDb.VM
                 {
                     using (var context = new UserDbContext())
                     {
-                        var down_billet = new UpBillet()
+                        var el = new UpBillet()
                         {
                             Material = Material,
                             Price = Price,
                             Density = Density
                         };
 
-                        down_billet = context.UpBillets.Find(down_billet.Id);
+                        el = context.UpBillets.Find(el.Id);
 
-                        down_billet.Material = Material;
-                        down_billet.Price = Price;
-                        down_billet.Density = Density;
+                        el.Material = Material;
+                        el.Price = Price;
+                        el.Density = Density;
 
                         context.SaveChanges();
                         MessageBox.Show("Запись изменена");

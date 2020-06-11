@@ -1,0 +1,22 @@
+﻿<Window x:Class="KursDb.View.LoginWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:KursDb.View"
+        mc:Ignorable="d"
+        Title="LoginWindow" 
+        WindowStartupLocation="CenterScreen"
+        Height="300" Width="240" ResizeMode="NoResize">
+
+    <Grid>
+        <StackPanel>
+            <Label Content="Логин"/>
+            <TextBox x:Name="tb_login" Width="auto" HorizontalAlignment="Stretch" Margin="10,0,10,0"/>
+            <Label Content="Пароль"/>
+            <PasswordBox x:Name="pb_password" Height="25" Width="auto" HorizontalAlignment="Stretch" Margin="10,0,10,0"/>
+        </StackPanel>
+        <Button Content="Вход" VerticalAlignment="Bottom" Margin="30,0,30,20" Height="45" Click="ProgremStart"/>        
+    </Grid>
+    
+</Window>
