@@ -9,13 +9,23 @@
       Title="ModelConstructorPage">
 
     <Grid Background="White">
-        <DockPanel HorizontalAlignment="Right" VerticalAlignment="Top">            
+        <DockPanel HorizontalAlignment="Left" VerticalAlignment="Top">
+            <Label Content="Пол:" Margin="5 5 0 0"/>
+            <ComboBox SelectedIndex="{Binding SelectedSex}" Margin="0 5 0 0">
+                <TextBlock Text="Мужские"/>
+                <TextBlock Text="Женские"/>
+                <TextBlock Text="Детские"/>
+            </ComboBox>
+            <Label Content="Размер:"  Margin="5 5 0 0"/>
+            <TextBox Text="{Binding Size}" HorizontalContentAlignment="Center" Margin="0 5 5 0" Width="60"/>
+        </DockPanel>
+        <DockPanel HorizontalAlignment="Right" VerticalAlignment="Top">
             <Button Content="Удалить" Height="35" Width="120" Margin="3 3 3 0" Style="{StaticResource RedButton}"/>
             <Button Content="Изменить" Height="35" Width="120" Margin="3 3 3 0" Style="{StaticResource RedButton}"/>
             <Button Content="Добавить" Height="35" Width="120" Margin="3 3 3 0"/>
         </DockPanel>
 
-        <TabControl x:Name="tc_tabs" Margin="0 40 0 0" FontSize="16">
+        <TabControl x:Name="tc_tabs" Margin="0 45 0 0" FontSize="16">
             <TabItem Header="Подкладочный материал">
                 <Grid Background="#FFE5E5E5">
                     <DataGrid x:Name="dg_down_billet" SelectionMode="Single" ItemsSource="{Binding DownBillet}" IsReadOnly="True" AutoGenerateColumns="False">
