@@ -37,8 +37,8 @@
         <Border Grid.Column="1" BorderBrush="Gray" BorderThickness="1"/>
         <Border BorderBrush="Gray" BorderThickness="1"/>
         <StackPanel>
-            <Button Content="Конструктор модели" Visibility="{Binding Visibility}"/>
-            <Button Content="Оформить заказ"/>
+            <Button Content="Конструктор модели" Command="{Binding ModelConstructorPageClick}" Visibility="{Binding ModelConstVisibility}"/>
+            <Button Content="Оформить заказ" Visibility="{Binding OrderVisibility}"/>
             <Button Content="Отчеты"/>
         </StackPanel>
         <Button Content="Выход" VerticalAlignment="Bottom" Style="{StaticResource RedButton}" Click="ExitClick"/>

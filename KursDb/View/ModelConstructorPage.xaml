@@ -6,12 +6,16 @@
       xmlns:local="clr-namespace:KursDb.View"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="ModelConstructorPage">
+      Title="ModelConstructorPage"
+      x:Name="p_page">
 
     <Grid Background="White">
+        <Frame Content="{Binding CorentPage}" NavigationUIVisibility="Hidden" Panel.ZIndex="1"/>
+        <Button Content="Назад" Command="{Binding BackClick}" Visibility="{Binding BackButtonVisibility}" Panel.ZIndex="3" Style="{StaticResource RedButton}" Margin="145 7" HorizontalAlignment="Right" Width="120" Height="35" VerticalAlignment="Bottom"/>
+
         <DockPanel HorizontalAlignment="Left" VerticalAlignment="Top">
             <Label Content="Пол:" Margin="5 5 0 0"/>
-            <ComboBox SelectedIndex="{Binding SelectedSex}" Margin="0 5 0 0">
+            <ComboBox SelectedIndex="{Binding SelectedSex}" Margin="0 5 0 0" Focusable="False">
                 <TextBlock Text="Мужские"/>
                 <TextBlock Text="Женские"/>
                 <TextBlock Text="Детские"/>
@@ -19,13 +23,14 @@
             <Label Content="Размер:"  Margin="5 5 0 0"/>
             <TextBox Text="{Binding Size}" HorizontalContentAlignment="Center" Margin="0 5 5 0" Width="60"/>
         </DockPanel>
-        <DockPanel HorizontalAlignment="Right" VerticalAlignment="Top">
+        <DockPanel HorizontalAlignment="Right" VerticalAlignment="Top" Focusable="False">
             <Button Content="Удалить" Height="35" Width="120" Margin="3 3 3 0" Style="{StaticResource RedButton}"/>
             <Button Content="Изменить" Height="35" Width="120" Margin="3 3 3 0" Style="{StaticResource RedButton}"/>
-            <Button Content="Добавить" Height="35" Width="120" Margin="3 3 3 0"/>
+            <Button Content="Добавить" Command="{Binding AddPageClick}" CommandParameter="{Binding ElementName=tc_tabs, Path=SelectedIndex}" Height="35" Width="120" Margin="3 3 3 0"/>
+            <Button Content="Далее" Height="35" Width="120" Margin="3 3 3 0"/>
         </DockPanel>
 
-        <TabControl x:Name="tc_tabs" Margin="0 45 0 0" FontSize="16">
+        <TabControl x:Name="tc_tabs" Margin="0 45 0 0" FontSize="16" Focusable="False">
             <TabItem Header="Подкладочный материал">
                 <Grid Background="#FFE5E5E5">
                     <DataGrid x:Name="dg_down_billet" SelectionMode="Single" ItemsSource="{Binding DownBillet}" IsReadOnly="True" AutoGenerateColumns="False">
@@ -75,7 +80,7 @@
                     </DataGrid>
                 </Grid>
             </TabItem>
-            <TabItem Header="Выкройка">
+            <TabItem Header="Колодка">
                 <Grid Background="#FFE5E5E5">
                     <DataGrid x:Name="dg_shoe_tree" SelectionMode="Single" ItemsSource="{Binding ShoeTree}" IsReadOnly="True" AutoGenerateColumns="False">
                         <DataGrid.Columns>
@@ -97,7 +102,6 @@
                             <DataGridTextColumn Header="Тип" Binding="{Binding Path=Type}"/>
                             <DataGridTextColumn Header="Цена за пару" Binding="{Binding Path=Price}"/>
                             <DataGridTextColumn Header="Сезон" Binding="{Binding Path=Season}"/>
-                            
                         </DataGrid.Columns>
                     </DataGrid>
                 </Grid>

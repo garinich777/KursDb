@@ -15,7 +15,7 @@ namespace KursDb.Model.Tables
         public int Size { get; set; }
         [Required]
         [MaxLength(1)]
-        public int Sex { get; set; }
+        public string Sex { get; set; }
 
         public virtual DownBillet DownBillet { get; set; }
         public virtual Insole Insole { get; set; }

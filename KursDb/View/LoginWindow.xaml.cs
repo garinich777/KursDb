@@ -18,41 +18,28 @@ namespace KursDb.View
             string password = pb_password.Password;
             string login = tb_login.Text;
 
-            Settings.Default.AddMaterialsPermission = true;
-            Settings.Default.AddModelPermission = true;
-            Settings.Default.AddOrderPermission = true;
-            Settings.Default.ModDelMaterialsPermission = true;
-            Settings.Default.ModDelModelPermission = true;
-            Settings.Default.ModDelOrderPermission = true;
-            Settings.Default.ViewMaterialsPermission = true;
-            Settings.Default.ViewModelPermission = true;
-            Settings.Default.ViewOrderPermission = true;
+            Settings.Default.ModelConstPermission = true;
+            Settings.Default.OrderPermission = true;
+            Settings.Default.AdminPermission = false;
 
             switch (login)
             {
                 case "1":
                     MessageBox.Show("Включен режим администратора!", "Опасно!", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    Settings.Default.AdminPermission = true;
                     break;
                 case "2":
-                    Settings.Default.AddOrderPermission = false;
-                    Settings.Default.ModDelMaterialsPermission = false;
-                    Settings.Default.ModDelModelPermission = false;
-                    Settings.Default.ModDelOrderPermission = false;
-                    Settings.Default.ViewOrderPermission = false;
+                    Settings.Default.ModelConstPermission = true;
+                    Settings.Default.OrderPermission = false;
                     break;
                 case "3":
-                    Settings.Default.AddMaterialsPermission = false;
-                    Settings.Default.AddModelPermission = false;
-                    Settings.Default.ModDelMaterialsPermission = false;
-                    Settings.Default.ModDelModelPermission = false;
-                    Settings.Default.ModDelOrderPermission = false;
-                    Settings.Default.ViewMaterialsPermission = false;
+                    Settings.Default.ModelConstPermission = false;
+                    Settings.Default.OrderPermission = true;
                     break;
                 default:
                     MessageBox.Show("Неправильный логин или пароль", "Ошибка", MessageBoxButton.OK,MessageBoxImage.Error);
                     return;
             }
-
             new MainWindow().Show();
             Close();
         }

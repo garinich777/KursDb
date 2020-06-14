@@ -8,9 +8,9 @@ namespace KursDb.VM
 {
     public class DownBilletVM : ViewModelBase
     {
-        string Material { get; set; }
-        int Price { get; set; }
-        int Density { get; set; }
+        public string Material { get; set; }
+        public int Price { get; set; }
+        public int Density { get; set; }
 
         public bool IsHaveValues;
 
@@ -44,7 +44,7 @@ namespace KursDb.VM
 
                         context.DownBillets.Add(down_billet);
                         context.SaveChanges();
-                        MessageBox.Show("Запись добавлена");
+                        MessageBox.Show("Запись успешно добавлена", "Ура!", MessageBoxButton.OK, MessageBoxImage.Information);
                     }
                 });
             }

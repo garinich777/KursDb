@@ -99,6 +99,7 @@
     <Compile Include="VM\FittingsVM.cs" />
     <Compile Include="VM\InsoleVM.cs" />
     <Compile Include="VM\MainVM.cs" />
+    <Compile Include="VM\ModelConstructorVM.cs" />
     <Compile Include="VM\PatternVM.cs" />
     <Compile Include="VM\SeasonEnum.cs" />
     <Compile Include="VM\SexEnum.cs" />

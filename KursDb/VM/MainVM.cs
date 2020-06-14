@@ -1,10 +1,6 @@
 ﻿using DevExpress.Mvvm;
+using KursDb.Properties;
 using KursDb.View;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -19,16 +15,39 @@ namespace KursDb.VM
             set { SetValue(value, "CorentPage"); }
         }
 
-        public Visibility Visibility
+        public Visibility ModelConstVisibility
         {
-            get { return GetValue<Visibility>("Visibility"); }
-            set { SetValue(value, "Visibility"); }
+            get { return GetValue<Visibility>("ModelConstVisibility"); }
+            set { SetValue(value, "ModelConstVisibility"); }
+        }
+
+        public Visibility OrderVisibility
+        {
+            get { return GetValue<Visibility>("OrderVisibility"); }
+            set { SetValue(value, "OrderVisibility"); }
         }
 
         public MainVM()
         {
-            CorentPage = new ModelConstructorPage();
-            Visibility = Visibility.Collapsed;
+            ModelConstVisibility = Visibility.Visible;
+            OrderVisibility = Visibility.Visible;
+            if (!Settings.Default.ModelConstPermission)
+                ModelConstVisibility = Visibility.Collapsed;
+            if (!Settings.Default.OrderPermission)
+                OrderVisibility = Visibility.Collapsed;
         }
+
+        public ICommand ModelConstructorPageClick
+        {
+            get
+            {
+                return new DelegateCommand(() =>
+                {
+                    CorentPage = new ModelConstructorPage(new ModelConstructorVM());
+                });
+            }
+        }
+
+
     }
 }

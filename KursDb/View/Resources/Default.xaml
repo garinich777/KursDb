@@ -8,6 +8,8 @@
         <Setter Property="Foreground" Value="White"/>
         <Setter Property="FontSize" Value="14"/>
         <Setter Property="FontFamily" Value="Time New Romen"/>
+        <Setter Property="Height" Value="35"/>
+        <Setter Property="Width" Value="120"/>
     </Style>
 
     <Style TargetType="Button" BasedOn="{StaticResource BaseButton}"/>

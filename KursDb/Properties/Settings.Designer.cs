@@ -12,7 +12,7 @@ namespace KursDb.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.6.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.5.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -26,108 +26,36 @@ namespace KursDb.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool AddMaterialsPermission {
+        public bool OrderPermission {
             get {
-                return ((bool)(this["AddMaterialsPermission"]));
+                return ((bool)(this["OrderPermission"]));
             }
             set {
-                this["AddMaterialsPermission"] = value;
+                this["OrderPermission"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool ModDelMaterialsPermission {
+        public bool ModelConstPermission {
             get {
-                return ((bool)(this["ModDelMaterialsPermission"]));
+                return ((bool)(this["ModelConstPermission"]));
             }
             set {
-                this["ModDelMaterialsPermission"] = value;
+                this["ModelConstPermission"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool ViewMaterialsPermission {
+        public bool AdminPermission {
             get {
-                return ((bool)(this["ViewMaterialsPermission"]));
+                return ((bool)(this["AdminPermission"]));
             }
             set {
-                this["ViewMaterialsPermission"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool AddOrderPermission {
-            get {
-                return ((bool)(this["AddOrderPermission"]));
-            }
-            set {
-                this["AddOrderPermission"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool ModDelOrderPermission {
-            get {
-                return ((bool)(this["ModDelOrderPermission"]));
-            }
-            set {
-                this["ModDelOrderPermission"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool ViewOrderPermission {
-            get {
-                return ((bool)(this["ViewOrderPermission"]));
-            }
-            set {
-                this["ViewOrderPermission"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool AddModelPermission {
-            get {
-                return ((bool)(this["AddModelPermission"]));
-            }
-            set {
-                this["AddModelPermission"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool ModDelModelPermission {
-            get {
-                return ((bool)(this["ModDelModelPermission"]));
-            }
-            set {
-                this["ModDelModelPermission"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool ViewModelPermission {
-            get {
-                return ((bool)(this["ViewModelPermission"]));
-            }
-            set {
-                this["ViewModelPermission"] = value;
+                this["AdminPermission"] = value;
             }
         }
     }

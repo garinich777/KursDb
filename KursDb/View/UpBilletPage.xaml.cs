@@ -11,7 +11,7 @@ namespace KursDb.View
     {
         ICommand ButtonCommand;
 
-        public UpBilletPage(DownBilletVM VM)
+        public UpBilletPage(UpBilletVM VM)
         {
             InitializeComponent();
             DataContext = VM;
