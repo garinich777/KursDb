@@ -8,8 +8,8 @@ namespace KursDb.VM
 {
     public class FittingsVM : ViewModelBase
     {
-        string Type { get; set; }
-        int Price { get; set; }
+        public string Type { get; set; }
+        public int Price { get; set; }
 
         public bool IsHaveValues;
 

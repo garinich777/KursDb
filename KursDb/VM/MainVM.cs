@@ -1,6 +1,7 @@
 ﻿using DevExpress.Mvvm;
 using KursDb.Properties;
 using KursDb.View;
+using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -43,7 +44,9 @@ namespace KursDb.VM
             {
                 return new DelegateCommand(() =>
                 {
-                    CorentPage = new ModelConstructorPage(new ModelConstructorVM());
+                    var VM = new ModelConstructorVM();
+                    CorentPage = new ModelConstructorPage(VM);
+                    VM.DateUpdate += (s, e) => CorentPage = new ModelConstructorPage(VM);
                 });
             }
         }

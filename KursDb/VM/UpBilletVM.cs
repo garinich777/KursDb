@@ -9,9 +9,9 @@ namespace KursDb.VM
 {
     public class UpBilletVM : ViewModelBase
     {
-        string Material { get; set; }
-        int Price { get; set; }
-        int Density { get; set; }
+        public string Material { get; set; }
+        public int Price { get; set; }
+        public int Density { get; set; }
 
         public bool IsHaveValues;
 

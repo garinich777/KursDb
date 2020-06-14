@@ -9,7 +9,7 @@ namespace KursDb.VM
 {
     public class ShoeTreeVM : ViewModelBase
     {
-        int SelectedSex
+        public int SelectedSex
         {
             get
             {
@@ -44,9 +44,9 @@ namespace KursDb.VM
                 }
             }
         }
-        string Type { get; set; }
-        string Sex { get; set; }
-        int Size { get; set; }
+        public string Type { get; set; }
+        public string Sex { get; set; }
+        public int Size { get; set; }
 
         public bool IsHaveValues;
 

@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Runtime.Remoting;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -20,6 +21,13 @@ namespace KursDb.VM
         public ModelConstructorVM()
         {
             BackButtonVisibility = Visibility.Collapsed;
+        }
+
+        public event EventHandler DateUpdate;
+        protected virtual void OnDateUpdate(EventArgs e)
+        {
+            EventHandler handler = DateUpdate;
+            handler?.Invoke(this, e);
         }
 
         public Page CorentPage
@@ -88,11 +96,61 @@ namespace KursDb.VM
                 }
             }
         }
-        public List<Insole> Insole { get; set; }
-        public List<Pattern> Pattern { get; set; }
-        public List<ShoeTree> ShoeTree { get; set; }
-        public List<Sole> Sole { get; set; }
-        public List<UpBillet> UpBillet { get; set; }
+        public List<Insole> Insole
+        {
+            get
+            {
+                using (var context = new UserDbContext())
+                {
+                    context.Insole.Load();
+                    return context.Insole.Local.ToList();
+                }
+            }
+        }
+        public List<Pattern> Pattern
+        {
+            get
+            {
+                using (var context = new UserDbContext())
+                {
+                    context.Patterns.Load();
+                    return context.Patterns.Local.ToList();
+                }
+            }
+        }
+        public List<ShoeTree> ShoeTree
+        {
+            get
+            {
+                using (var context = new UserDbContext())
+                {
+                    context.ShoeTrees.Load();
+                    return context.ShoeTrees.Local.ToList();
+                }
+            }
+        }
+        public List<Sole> Sole
+        {
+            get
+            {
+                using (var context = new UserDbContext())
+                {
+                    context.Soles.Load();
+                    return context.Soles.Local.ToList();
+                }
+            }
+        }
+        public List<UpBillet> UpBillet
+        {
+            get
+            {
+                using (var context = new UserDbContext())
+                {
+                    context.UpBillets.Load();
+                    return context.UpBillets.Local.ToList();
+                }
+            }
+        }
 
         public ICommand BackClick
         {
@@ -102,6 +160,7 @@ namespace KursDb.VM
                 {
                     CorentPage.Visibility = Visibility.Collapsed;
                     BackButtonVisibility = Visibility.Collapsed;
+                    OnDateUpdate(EventArgs.Empty);
                 });
             }
         }
@@ -116,7 +175,8 @@ namespace KursDb.VM
                     switch (selected_index)
                     {
                         case 0:
-                            CorentPage = new DownBilletPage(new DownBilletVM());
+                            DownBilletVM VM = new DownBilletVM();
+                            CorentPage = new DownBilletPage(VM);
                             CorentPage.Visibility = Visibility.Visible;                            
                             break;
                         case 1:

@@ -8,7 +8,7 @@ namespace KursDb.VM
 {
     public class SoleVM : ViewModelBase
     {
-        int SelectedSex
+        public int SelectedSex
         {
             get
             {
@@ -43,7 +43,7 @@ namespace KursDb.VM
                 }
             }
         }
-        int SelectedSeason
+        public int SelectedSeason
         {
             get
             {
@@ -83,11 +83,11 @@ namespace KursDb.VM
                 }
             }
         }
-        string Type { get; set; }
-        string Season { get; set; }
-        string Sex { get; set; }
-        int Size { get; set; }
-        int Price { get; set; }
+        public string Type { get; set; }
+        public string Season { get; set; }
+        public string Sex { get; set; }
+        public int Size { get; set; }
+        public int Price { get; set; }
 
         public bool IsHaveValues;
 

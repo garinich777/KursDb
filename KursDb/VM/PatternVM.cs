@@ -8,7 +8,7 @@ namespace KursDb.VM
 {
     public class PatternVM : ViewModelBase
     {
-        int SelectedSex
+        public int SelectedSex
         {
             get
             {
@@ -43,10 +43,10 @@ namespace KursDb.VM
                 }
             }
         }
-        string Sex { get; set; }
-        int Size { get; set; }
-        int Square { get; set; }
-        int Сomplexity { get; set; }
+        public string Sex { get; set; }
+        public int Size { get; set; }
+        public int Square { get; set; }
+        public int Сomplexity { get; set; }
 
         public bool IsHaveValues;
 

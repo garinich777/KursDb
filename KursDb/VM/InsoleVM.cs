@@ -8,7 +8,7 @@ namespace KursDb.VM
 {
     public class InsoleVM : ViewModelBase
     {
-        int SelectedSex
+        public int SelectedSex
         {
             get 
             {
@@ -43,9 +43,9 @@ namespace KursDb.VM
                 }
             } 
         }
-        string Sex { get; set; }
-        int Size { get; set; }
-        int Price { get; set; }
+        public string Sex { get; set; }
+        public int Size { get; set; }
+        public int Price { get; set; }
 
         public bool IsHaveValues;
 

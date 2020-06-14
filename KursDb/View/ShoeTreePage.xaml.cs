@@ -9,20 +9,18 @@ namespace KursDb.View
     /// </summary>
     public partial class ShoeTreePage : Page
     {
-        ICommand ButtonCommand;
-
         public ShoeTreePage(ShoeTreeVM VM)
         {
             InitializeComponent();
             DataContext = VM;
             if (VM.IsHaveValues)
             {
-                ButtonCommand = VM.ModCommand;
+                bt_add_mod.Command = VM.ModCommand;
                 bt_add_mod.Content = "Изменить";
             }
             else
             {
-                ButtonCommand = VM.AddCommand;
+                bt_add_mod.Command = VM.AddCommand;
                 bt_add_mod.Content = "Добавить";
             }
         }
