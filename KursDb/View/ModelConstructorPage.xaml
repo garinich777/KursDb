@@ -30,7 +30,7 @@
             <Button Content="Далее" Height="35" Width="120" Margin="3 3 3 0"/>
         </DockPanel>
 
-        <TabControl x:Name="tc_tabs" Margin="0 45 0 0" FontSize="16" Focusable="False">
+        <TabControl x:Name="tc_tabs" Margin="0 45 0 0" FontSize="16" SelectedIndex="{Binding TabIndex}" Focusable="False">
             <TabItem Header="Подкладочный материал">
                 <Grid Background="#FFE5E5E5">
                     <DataGrid x:Name="dg_down_billet" SelectionMode="Single" ItemsSource="{Binding DownBillet}" IsReadOnly="True" AutoGenerateColumns="False">

@@ -36,6 +36,12 @@ namespace KursDb.VM
             set { SetValue(value, "CorentPage"); }
         }
 
+        public int TabIndex
+        {
+            get { return GetValue<int>("TabIndex"); }
+            set { SetValue(value, "TabIndex"); }
+        }
+
         public Visibility BackButtonVisibility
         {
             get { return GetValue<Visibility>("BackButtonVisibility"); }
@@ -45,7 +51,11 @@ namespace KursDb.VM
         public int Size
         {
             get { return GetValue<int>("Size"); }
-            set { SetValue(value, "Size"); }
+            set 
+            { 
+                OnDateUpdate(EventArgs.Empty); 
+                SetValue(value, "Size"); 
+            }
         }
 
         public int SelectedSex
@@ -81,9 +91,11 @@ namespace KursDb.VM
                         Sex = string.Empty;
                         break;
                 }
+                OnDateUpdate(EventArgs.Empty);
             }
         }
         public string Sex { get; set; }
+ 
 
         public List<DownBillet> DownBillet 
         { 
@@ -102,8 +114,8 @@ namespace KursDb.VM
             {
                 using (var context = new UserDbContext())
                 {
-                    context.Insole.Load();
-                    return context.Insole.Local.ToList();
+                    context.Insole.Load();                    
+                    return context.Insole.Local.ToList().FindAll(n => (n.Sex == Sex || SelectedSex == -1) && (n.Size == Size || Size == 0));
                 }
             }
         }
@@ -114,7 +126,7 @@ namespace KursDb.VM
                 using (var context = new UserDbContext())
                 {
                     context.Patterns.Load();
-                    return context.Patterns.Local.ToList();
+                    return context.Patterns.Local.ToList().FindAll(n => (n.Sex == Sex || SelectedSex == -1) && (n.Size == Size || Size == 0));
                 }
             }
         }
@@ -125,7 +137,7 @@ namespace KursDb.VM
                 using (var context = new UserDbContext())
                 {
                     context.ShoeTrees.Load();
-                    return context.ShoeTrees.Local.ToList();
+                    return context.ShoeTrees.Local.ToList().FindAll(n => (n.Sex == Sex || SelectedSex == -1) && (n.Size == Size || Size == 0));
                 }
             }
         }
@@ -136,7 +148,7 @@ namespace KursDb.VM
                 using (var context = new UserDbContext())
                 {
                     context.Soles.Load();
-                    return context.Soles.Local.ToList();
+                    return context.Soles.Local.ToList().FindAll(n => (n.Sex == Sex || SelectedSex == -1) && (n.Size == Size || Size == 0));
                 }
             }
         }
