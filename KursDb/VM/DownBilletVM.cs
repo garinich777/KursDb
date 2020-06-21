@@ -8,6 +8,7 @@ namespace KursDb.VM
 {
     public class DownBilletVM : ViewModelBase
     {
+        public int Id { get; set; }
         public string Material { get; set; }
         public int Price { get; set; }
         public int Density { get; set; }
@@ -21,6 +22,7 @@ namespace KursDb.VM
 
         public DownBilletVM(DownBillet down_billet)
         {
+            Id = down_billet.Id;
             Material = down_billet.Material;
             Price = down_billet.Price;
             Density = down_billet.Density;
@@ -58,14 +60,7 @@ namespace KursDb.VM
                 {
                     using (var context = new UserDbContext())
                     {
-                        var down_billet = new DownBillet()
-                        {
-                            Material = Material,
-                            Price = Price,
-                            Density = Density
-                        };
-
-                        down_billet = context.DownBillets.Find(down_billet.Id);
+                        var down_billet = context.DownBillets.Find(Id);
 
                         down_billet.Material = Material;
                         down_billet.Price = Price;

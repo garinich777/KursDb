@@ -18,14 +18,14 @@
             <ComboBox SelectedIndex="{Binding SelectedSex}" Margin="0 5 0 0" Focusable="False">
                 <TextBlock Text="Мужские"/>
                 <TextBlock Text="Женские"/>
-                <TextBlock Text="Детские"/>
+                <TextBlock Text="Детские"/> 
             </ComboBox>
             <Label Content="Размер:"  Margin="5 5 0 0"/>
             <TextBox Text="{Binding Size}" HorizontalContentAlignment="Center" Margin="0 5 5 0" Width="60"/>
         </DockPanel>
         <DockPanel HorizontalAlignment="Right" VerticalAlignment="Top" Focusable="False">
             <Button Content="Удалить" Height="35" Width="120" Margin="3 3 3 0" Style="{StaticResource RedButton}"/>
-            <Button Content="Изменить" Height="35" Width="120" Margin="3 3 3 0" Style="{StaticResource RedButton}"/>
+            <Button Content="Изменить" Command="{Binding ModPageClick}" Height="35" Width="120" Margin="3 3 3 0" Style="{StaticResource RedButton}"/>
             <Button Content="Добавить" Command="{Binding AddPageClick}" CommandParameter="{Binding ElementName=tc_tabs, Path=SelectedIndex}" Height="35" Width="120" Margin="3 3 3 0"/>
             <Button Content="Далее" Height="35" Width="120" Margin="3 3 3 0"/>
         </DockPanel>
@@ -33,7 +33,7 @@
         <TabControl x:Name="tc_tabs" Margin="0 45 0 0" FontSize="16" SelectedIndex="{Binding TabIndex}" Focusable="False">
             <TabItem Header="Подкладочный материал">
                 <Grid Background="#FFE5E5E5">
-                    <DataGrid x:Name="dg_down_billet" SelectionMode="Single" ItemsSource="{Binding DownBillet}" IsReadOnly="True" AutoGenerateColumns="False">
+                    <DataGrid x:Name="dg_down_billet" SelectionMode="Single" ItemsSource="{Binding DownBilletList}" SelectedItem="{Binding DownBillet}" IsReadOnly="True" AutoGenerateColumns="False">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Артикул" Binding="{Binding Path=Id}"/>
                             <DataGridTextColumn Header="Материал" Binding="{Binding Path=Material}"/>
@@ -45,7 +45,7 @@
             </TabItem>
             <TabItem Header="Загатовка верха обуви">
                 <Grid Background="#FFE5E5E5">
-                    <DataGrid x:Name="dg_up_billet" SelectionMode="Single" ItemsSource="{Binding UpBillet}" IsReadOnly="True" AutoGenerateColumns="False">
+                    <DataGrid x:Name="dg_up_billet" SelectionMode="Single" ItemsSource="{Binding UpBilletList}" SelectedItem="{Binding UpBillet}" IsReadOnly="True" AutoGenerateColumns="False">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Артикул" Binding="{Binding Path=Id}"/>
                             <DataGridTextColumn Header="Материал" Binding="{Binding Path=Material}"/>
@@ -57,7 +57,7 @@
             </TabItem>
             <TabItem Header="Стелька">
                 <Grid Background="#FFE5E5E5">
-                    <DataGrid x:Name="dg_insole" SelectionMode="Single" ItemsSource="{Binding Insole}" IsReadOnly="True" AutoGenerateColumns="False">
+                    <DataGrid x:Name="dg_insole" SelectionMode="Single" ItemsSource="{Binding InsoleList}" SelectedItem="{Binding Insole}" IsReadOnly="True" AutoGenerateColumns="False">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Артикул" Binding="{Binding Path=Id}"/>
                             <DataGridTextColumn Header="Пол" Binding="{Binding Path=Sex}"/>
@@ -69,7 +69,7 @@
             </TabItem>
             <TabItem Header="Выкройка">
                 <Grid Background="#FFE5E5E5">
-                    <DataGrid x:Name="dg_pattern" SelectionMode="Single" ItemsSource="{Binding Pattern}" IsReadOnly="True" AutoGenerateColumns="False">
+                    <DataGrid x:Name="dg_pattern" SelectionMode="Single" ItemsSource="{Binding PatternList}" SelectedItem="{Binding Pattern}" IsReadOnly="True" AutoGenerateColumns="False">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Артикул" Binding="{Binding Path=Id}"/>
                             <DataGridTextColumn Header="Пол" Binding="{Binding Path=Sex}"/>
@@ -82,7 +82,7 @@
             </TabItem>
             <TabItem Header="Колодка">
                 <Grid Background="#FFE5E5E5">
-                    <DataGrid x:Name="dg_shoe_tree" SelectionMode="Single" ItemsSource="{Binding ShoeTree}" IsReadOnly="True" AutoGenerateColumns="False">
+                    <DataGrid x:Name="dg_shoe_tree" SelectionMode="Single" ItemsSource="{Binding ShoeTreeList}" SelectedItem="{Binding ShoeTree}" IsReadOnly="True" AutoGenerateColumns="False">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Артикул" Binding="{Binding Path=Id}"/>
                             <DataGridTextColumn Header="Пол" Binding="{Binding Path=Sex}"/>
@@ -94,7 +94,7 @@
             </TabItem>
             <TabItem Header="Подошва">
                 <Grid Background="#FFE5E5E5">
-                    <DataGrid x:Name="dg_sole" SelectionMode="Single" ItemsSource="{Binding Sole}" IsReadOnly="True" AutoGenerateColumns="False">
+                    <DataGrid x:Name="dg_sole" SelectionMode="Single" ItemsSource="{Binding SoleList}" SelectedItem="{Binding Sole}" IsReadOnly="True" AutoGenerateColumns="False">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Артикул" Binding="{Binding Path=Id}"/>
                             <DataGridTextColumn Header="Пол" Binding="{Binding Path=Sex}"/>

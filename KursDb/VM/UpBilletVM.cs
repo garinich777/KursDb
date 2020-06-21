@@ -20,7 +20,7 @@ namespace KursDb.VM
             IsHaveValues = false;
         }
 
-        public UpBilletVM(DownBillet el)
+        public UpBilletVM(UpBillet el)
         {
             Material = el.Material;
             Price = el.Price;

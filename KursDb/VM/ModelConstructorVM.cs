@@ -1,15 +1,11 @@
 ﻿using DevExpress.Mvvm;
 using KursDb.Model;
 using KursDb.Model.Tables;
-using KursDb.Properties;
 using KursDb.View;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Runtime.Remoting;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -35,6 +31,44 @@ namespace KursDb.VM
             get { return GetValue<Page>("CorentPage"); }
             set { SetValue(value, "CorentPage"); }
         }
+
+        #region Main Parametrs
+        public DownBillet DownBillet
+        {
+            get { return GetValue<DownBillet>("DownBillet"); }
+            set { SetValue(value, "DownBillet"); }
+        }
+
+        public Insole Insole
+        {
+            get { return GetValue<Insole>("Insole"); }
+            set { SetValue(value, "Insole"); }
+        }
+
+        public Pattern Pattern
+        {
+            get { return GetValue<Pattern>("Pattern"); }
+            set { SetValue(value, "Pattern"); }
+        }
+
+        public ShoeTree ShoeTree
+        {
+            get { return GetValue<ShoeTree>("ShoeTree"); }
+            set { SetValue(value, "ShoeTree"); }
+        }
+
+        public Sole Sole
+        {
+            get { return GetValue<Sole>("Sole"); }
+            set { SetValue(value, "Sole"); }
+        }
+
+        public UpBillet UpBillet
+        {
+            get { return GetValue<UpBillet>("UpBillet"); }
+            set { SetValue(value, "UpBillet"); }
+        }
+        #endregion Main Parametrs
 
         public int TabIndex
         {
@@ -95,9 +129,9 @@ namespace KursDb.VM
             }
         }
         public string Sex { get; set; }
- 
 
-        public List<DownBillet> DownBillet 
+        #region MainLists
+        public List<DownBillet> DownBilletList 
         { 
             get
             {
@@ -108,7 +142,7 @@ namespace KursDb.VM
                 }
             }
         }
-        public List<Insole> Insole
+        public List<Insole> InsoleList
         {
             get
             {
@@ -119,7 +153,7 @@ namespace KursDb.VM
                 }
             }
         }
-        public List<Pattern> Pattern
+        public List<Pattern> PatternList
         {
             get
             {
@@ -130,7 +164,7 @@ namespace KursDb.VM
                 }
             }
         }
-        public List<ShoeTree> ShoeTree
+        public List<ShoeTree> ShoeTreeList
         {
             get
             {
@@ -141,7 +175,7 @@ namespace KursDb.VM
                 }
             }
         }
-        public List<Sole> Sole
+        public List<Sole> SoleList
         {
             get
             {
@@ -152,7 +186,7 @@ namespace KursDb.VM
                 }
             }
         }
-        public List<UpBillet> UpBillet
+        public List<UpBillet> UpBilletList
         {
             get
             {
@@ -163,6 +197,7 @@ namespace KursDb.VM
                 }
             }
         }
+        #endregion MainList
 
         public ICommand BackClick
         {
@@ -177,7 +212,100 @@ namespace KursDb.VM
             }
         }
 
+        private void StartCorentPage(Page page)
+        {
+            CorentPage = page;
+            CorentPage.Visibility = Visibility.Visible;
+        }
+
         public ICommand AddPageClick
+        {
+            get
+            {
+                return new DelegateCommand<int>((selected_index) =>
+                {
+                    BackButtonVisibility = Visibility.Visible;
+                    switch (selected_index)
+                    {
+                        case 0:
+                            StartCorentPage(new DownBilletPage(new DownBilletVM()));                           
+                            break;
+                        case 1:
+                            StartCorentPage(new UpBilletPage(new UpBilletVM()));
+                            break;
+                        case 2:
+                            StartCorentPage(new InsolePage(new InsoleVM()));
+                            break;
+                        case 3:
+                            StartCorentPage(new PatternPage(new PatternVM()));
+                            break;
+                        case 4:
+                            StartCorentPage(new ShoeTreePage(new ShoeTreeVM()));
+                            break;
+                        case 5:
+                            StartCorentPage(new SolePage(new SoleVM()));
+                            break;
+                        default:
+                            BackButtonVisibility = Visibility.Collapsed;
+                            CorentPage.Visibility = Visibility.Collapsed;
+                            break;
+                    }
+                });
+            }
+        }
+
+
+
+        public ICommand ModPageClick
+        {
+            get
+            {
+                return new DelegateCommand<int>((selected_index) =>
+                {
+                    BackButtonVisibility = Visibility.Visible;
+                    switch (selected_index)
+                    {
+                        case 0:
+                            if (DownBillet != null)
+                            {
+                                StartCorentPage(new DownBilletPage(new DownBilletVM(DownBillet)));
+                            }                                
+                            else
+                            {
+                                MessageBox.Show("Выберете поле для изменения");
+                                BackButtonVisibility = Visibility.Collapsed;
+                            }                                                           
+                            break;
+                        case 1:
+                            CorentPage = new UpBilletPage(new UpBilletVM(UpBillet));
+                            CorentPage.Visibility = Visibility.Visible;
+                            break;
+                        case 2:
+                            CorentPage = new InsolePage(new InsoleVM(Insole));
+                            CorentPage.Visibility = Visibility.Visible;
+                            break;
+                        case 3:
+                            CorentPage = new PatternPage(new PatternVM(Pattern));
+                            CorentPage.Visibility = Visibility.Visible;
+                            break;
+                        case 4:
+                            CorentPage = new ShoeTreePage(new ShoeTreeVM(ShoeTree));
+                            CorentPage.Visibility = Visibility.Visible;
+                            break;
+                        case 5:
+                            CorentPage = new SolePage(new SoleVM(Sole));
+                            CorentPage.Visibility = Visibility.Visible;
+                            break;
+                        default:
+                            BackButtonVisibility = Visibility.Collapsed;
+                            CorentPage.Visibility = Visibility.Collapsed;
+                            break;
+                    }
+                });
+            }
+        }
+
+        public ICommand DeletePageClick
         {
             get
             {
@@ -189,7 +317,7 @@ namespace KursDb.VM
                         case 0:
                             DownBilletVM VM = new DownBilletVM();
                             CorentPage = new DownBilletPage(VM);
-                            CorentPage.Visibility = Visibility.Visible;                            
+                            CorentPage.Visibility = Visibility.Visible;
                             break;
                         case 1:
                             CorentPage = new UpBilletPage(new UpBilletVM());
@@ -219,7 +347,6 @@ namespace KursDb.VM
                 });
             }
         }
-
 
     }
 }
