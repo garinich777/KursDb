@@ -1,6 +1,7 @@
 ﻿using DevExpress.Mvvm;
 using KursDb.Model;
 using KursDb.Model.Tables;
+using KursDb.Properties;
 using KursDb.View;
 using System;
 using System.Collections.Generic;
@@ -91,7 +92,6 @@ namespace KursDb.VM
                 SetValue(value, "Size"); 
             }
         }
-
         public int SelectedSex
         {
             get
@@ -212,38 +212,51 @@ namespace KursDb.VM
             }
         }
 
-        private void StartCorentPage(Page page)
+        private void StartCorentAddPage(Page page)
         {
             CorentPage = page;
             CorentPage.Visibility = Visibility.Visible;
+        }
+
+        private void StartCorentModPage(Page page, bool IsNotNull)
+        {
+            if (IsNotNull)
+            {
+                StartCorentAddPage(page);
+            }
+            else
+            {                
+                BackButtonVisibility = Visibility.Collapsed;
+                MessageBox.Show("Выберете поле для изменения");
+            }
         }
 
         public ICommand AddPageClick
         {
             get
             {
-                return new DelegateCommand<int>((selected_index) =>
+                return new DelegateCommand(() =>
                 {
                     BackButtonVisibility = Visibility.Visible;
-                    switch (selected_index)
+                    switch (TabIndex)
                     {
                         case 0:
-                            StartCorentPage(new DownBilletPage(new DownBilletVM()));                           
+                            StartCorentAddPage(new DownBilletPage(new DownBilletVM()));                           
                             break;
                         case 1:
-                            StartCorentPage(new UpBilletPage(new UpBilletVM()));
+                            StartCorentAddPage(new UpBilletPage(new UpBilletVM()));
                             break;
                         case 2:
-                            StartCorentPage(new InsolePage(new InsoleVM()));
+                            StartCorentAddPage(new InsolePage(new InsoleVM()));
                             break;
                         case 3:
-                            StartCorentPage(new PatternPage(new PatternVM()));
+                            StartCorentAddPage(new PatternPage(new PatternVM()));
                             break;
                         case 4:
-                            StartCorentPage(new ShoeTreePage(new ShoeTreeVM()));
+                            StartCorentAddPage(new ShoeTreePage(new ShoeTreeVM()));
                             break;
                         case 5:
-                            StartCorentPage(new SolePage(new SoleVM()));
+                            StartCorentAddPage(new SolePage(new SoleVM()));
                             break;
                         default:
                             BackButtonVisibility = Visibility.Collapsed;
@@ -254,47 +267,37 @@ namespace KursDb.VM
             }
         }
 
-
-
         public ICommand ModPageClick
         {
             get
             {
-                return new DelegateCommand<int>((selected_index) =>
+                return new DelegateCommand(() =>
                 {
+                    if (!Settings.Default.AdminPermission)
+                    {
+                        MessageBox.Show("У вас недостаточно прав на совершения этого действия", "Отказано!", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        return;
+                    }
                     BackButtonVisibility = Visibility.Visible;
-                    switch (selected_index)
+                    switch (TabIndex)
                     {
                         case 0:
-                            if (DownBillet != null)
-                            {
-                                StartCorentPage(new DownBilletPage(new DownBilletVM(DownBillet)));
-                            }                                
-                            else
-                            {
-                                MessageBox.Show("Выберете поле для изменения");
-                                BackButtonVisibility = Visibility.Collapsed;
-                            }                                                           
+                            StartCorentModPage(new DownBilletPage(new DownBilletVM(DownBillet)), DownBillet != null);                                                       
                             break;
                         case 1:
-                            CorentPage = new UpBilletPage(new UpBilletVM(UpBillet));
-                            CorentPage.Visibility = Visibility.Visible;
+                            StartCorentModPage(new UpBilletPage(new UpBilletVM(UpBillet)), UpBillet != null);
                             break;
                         case 2:
-                            CorentPage = new InsolePage(new InsoleVM(Insole));
-                            CorentPage.Visibility = Visibility.Visible;
+                            StartCorentModPage(new InsolePage(new InsoleVM(Insole)), Insole != null);
                             break;
                         case 3:
-                            CorentPage = new PatternPage(new PatternVM(Pattern));
-                            CorentPage.Visibility = Visibility.Visible;
+                            StartCorentModPage(new PatternPage(new PatternVM(Pattern)), Pattern != null);
                             break;
                         case 4:
-                            CorentPage = new ShoeTreePage(new ShoeTreeVM(ShoeTree));
-                            CorentPage.Visibility = Visibility.Visible;
+                            StartCorentModPage(new ShoeTreePage(new ShoeTreeVM(ShoeTree)), ShoeTree != null);
                             break;
                         case 5:
-                            CorentPage = new SolePage(new SoleVM(Sole));
-                            CorentPage.Visibility = Visibility.Visible;
+                            StartCorentModPage(new SolePage(new SoleVM(Sole)), Sole != null);
                             break;
                         default:
                             BackButtonVisibility = Visibility.Collapsed;

@@ -9,6 +9,8 @@ namespace KursDb.VM
 {
     public class ShoeTreeVM : ViewModelBase
     {
+        
+        public int Id { get; set; }
         public int SelectedSex
         {
             get
@@ -58,6 +60,12 @@ namespace KursDb.VM
 
         public ShoeTreeVM(ShoeTree el)
         {
+            if (el == null)
+            {
+                IsHaveValues = false;
+                return;
+            }
+            Id = el.Id;
             Type = el.Type;
             Sex = el.Sex;
             Size = el.Size;
@@ -95,18 +103,11 @@ namespace KursDb.VM
                 {
                     using (var context = new UserDbContext())
                     {
-                        var el = new ShoeTree()
-                        {
-                            Type = Type,
-                            Sex = Sex,
-                            Size = Size,
-                        };
+                        var el = context.ShoeTrees.Find(Id);
 
-                        el = context.ShoeTrees.Find(el.Id);
-
-                        Type = Type;
-                        Sex = Sex;
-                        Size = Size;
+                        el.Type = Type;
+                        el.Sex = Sex;
+                        el.Size = Size;
 
                         context.SaveChanges();
                         MessageBox.Show("Запись изменена");

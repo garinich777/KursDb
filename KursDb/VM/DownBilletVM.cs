@@ -20,12 +20,18 @@ namespace KursDb.VM
             IsHaveValues = false;
         }
 
-        public DownBilletVM(DownBillet down_billet)
+        public DownBilletVM(DownBillet el)
         {
-            Id = down_billet.Id;
-            Material = down_billet.Material;
-            Price = down_billet.Price;
-            Density = down_billet.Density;
+            if (el == null)
+            {
+                IsHaveValues = false;
+                return;
+            }
+
+            Id = el.Id;
+            Material = el.Material;
+            Price = el.Price;
+            Density = el.Density;
             IsHaveValues = true;
         }
 
@@ -60,11 +66,11 @@ namespace KursDb.VM
                 {
                     using (var context = new UserDbContext())
                     {
-                        var down_billet = context.DownBillets.Find(Id);
+                        var el = context.DownBillets.Find(Id);
 
-                        down_billet.Material = Material;
-                        down_billet.Price = Price;
-                        down_billet.Density = Density;
+                        el.Material = Material;
+                        el.Price = Price;
+                        el.Density = Density;
 
                         context.SaveChanges();
                         MessageBox.Show("Запись изменена");

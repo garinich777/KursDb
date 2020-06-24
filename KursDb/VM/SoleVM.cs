@@ -8,6 +8,7 @@ namespace KursDb.VM
 {
     public class SoleVM : ViewModelBase
     {
+        public int Id { get; set; }
         public int SelectedSex
         {
             get
@@ -100,6 +101,12 @@ namespace KursDb.VM
 
         public SoleVM(Sole el)
         {
+            if (el == null)
+            {
+                IsHaveValues = false;
+                return;
+            }
+            Id = el.Id;
             Sex = el.Sex;
             Price = el.Price;
             Type = el.Type;
@@ -141,22 +148,13 @@ namespace KursDb.VM
                 {
                     using (var context = new UserDbContext())
                     {
-                        var insole = new Sole()
-                        {
-                            Sex = Sex,
-                            Price = Price,
-                            Type = Type,
-                            Season = Season,
-                            Size = Size,
-                        };
+                        var el = context.Soles.Find(Id);
 
-                        insole = context.Soles.Find(insole.Id);
-
-                        Sex = Sex;
-                        Price = Price;
-                        Type = Type;
-                        Season = Season;
-                        Size = Size;
+                        el.Sex = Sex;
+                        el.Price = Price;
+                        el.Type = Type;
+                        el.Season = Season;
+                        el.Size = Size;
 
                         context.SaveChanges();
                         MessageBox.Show("Запись изменена");

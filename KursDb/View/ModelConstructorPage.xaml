@@ -26,7 +26,7 @@
         <DockPanel HorizontalAlignment="Right" VerticalAlignment="Top" Focusable="False">
             <Button Content="Удалить" Height="35" Width="120" Margin="3 3 3 0" Style="{StaticResource RedButton}"/>
             <Button Content="Изменить" Command="{Binding ModPageClick}" Height="35" Width="120" Margin="3 3 3 0" Style="{StaticResource RedButton}"/>
-            <Button Content="Добавить" Command="{Binding AddPageClick}" CommandParameter="{Binding ElementName=tc_tabs, Path=SelectedIndex}" Height="35" Width="120" Margin="3 3 3 0"/>
+            <Button Content="Добавить" Command="{Binding AddPageClick}" Height="35" Width="120" Margin="3 3 3 0"/>
             <Button Content="Далее" Height="35" Width="120" Margin="3 3 3 0"/>
         </DockPanel>
 

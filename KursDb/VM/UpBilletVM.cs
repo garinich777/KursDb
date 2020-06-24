@@ -9,6 +9,7 @@ namespace KursDb.VM
 {
     public class UpBilletVM : ViewModelBase
     {
+        public int Id { get; set; }
         public string Material { get; set; }
         public int Price { get; set; }
         public int Density { get; set; }
@@ -22,10 +23,16 @@ namespace KursDb.VM
 
         public UpBilletVM(UpBillet el)
         {
+            if (el == null)
+            {
+                IsHaveValues = false;
+                return;
+            }
+            Id = el.Id;
             Material = el.Material;
             Price = el.Price;
             Density = el.Density;
-            IsHaveValues = true;
+            IsHaveValues = true;                
         }
 
         public ICommand AddCommand
@@ -59,14 +66,7 @@ namespace KursDb.VM
                 {
                     using (var context = new UserDbContext())
                     {
-                        var el = new UpBillet()
-                        {
-                            Material = Material,
-                            Price = Price,
-                            Density = Density
-                        };
-
-                        el = context.UpBillets.Find(el.Id);
+                        var el = context.UpBillets.Find(Id);
 
                         el.Material = Material;
                         el.Price = Price;

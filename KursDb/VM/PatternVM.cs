@@ -8,8 +8,10 @@ namespace KursDb.VM
 {
     public class PatternVM : ViewModelBase
     {
+        public int Id { get; set; }
+
         public int SelectedSex
-        {
+        {            
             get
             {
                 switch (Sex)
@@ -58,6 +60,12 @@ namespace KursDb.VM
 
         public PatternVM(Pattern el)
         {
+            if (el == null)
+            {
+                IsHaveValues = false;
+                return;
+            }
+            Id = el.Id;
             Sex = el.Sex;
             Size = el.Size;
             Square = el.Square;
@@ -97,20 +105,12 @@ namespace KursDb.VM
                 {
                     using (var context = new UserDbContext())
                     {
-                        var el = new Pattern()
-                        {
-                            Sex = Sex,
-                            Size = Size,
-                            Square = Square,
-                            Сomplexity = Сomplexity
-                        };
+                        var el = context.Patterns.Find(Id);
 
-                        el = context.Patterns.Find(el.Id);
-
-                        Sex = Sex;
-                        Size = Size;
-                        Square = Square;
-                        Сomplexity = Сomplexity;
+                        el.Sex = Sex;
+                        el.Size = Size;
+                        el.Square = Square;
+                        el.Сomplexity = Сomplexity;
 
                         context.SaveChanges();
                         MessageBox.Show("Запись изменена");

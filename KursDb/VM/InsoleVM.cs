@@ -8,6 +8,7 @@ namespace KursDb.VM
 {
     public class InsoleVM : ViewModelBase
     {
+        public int Id { get; set; }
         public int SelectedSex
         {
             get 
@@ -55,10 +56,17 @@ namespace KursDb.VM
             IsHaveValues = false;
         }
 
-        public InsoleVM(Insole down_billet)
-        {            
-            Sex = down_billet.Sex;
-            Price = down_billet.Price;
+        public InsoleVM(Insole el)
+        {
+            if (el == null)
+            {
+                IsHaveValues = false;
+                return;
+            }
+            Id = el.Id;
+            Sex = el.Sex;
+            Size = el.Size;
+            Price = el.Price;
             IsHaveValues = true;
         }
 
@@ -93,18 +101,11 @@ namespace KursDb.VM
                 {
                     using (var context = new UserDbContext())
                     {
-                        var insole = new Insole()
-                        {
-                            Sex = Sex,
-                            Size = Size,
-                            Price = Price,
-                        };
+                        var el = context.Insole.Find(Id);
 
-                        insole = context.Insole.Find(insole.Id);
-
-                        Sex = Sex;
-                        Size = Size;
-                        Price = Price;
+                        el.Sex = Sex;
+                        el.Size = Size;
+                        el.Price = Price;
 
                         context.SaveChanges();
                         MessageBox.Show("Запись изменена");
