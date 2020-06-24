@@ -308,45 +308,87 @@ namespace KursDb.VM
             }
         }
 
-        public ICommand DeletePageClick
+        public ICommand DeleteClick
         {
             get
             {
-                return new DelegateCommand<int>((selected_index) =>
+                return new DelegateCommand(() =>
                 {
-                    BackButtonVisibility = Visibility.Visible;
-                    switch (selected_index)
+                    if (!Settings.Default.AdminPermission)
+                    {
+                        MessageBox.Show("У вас недостаточно прав на совершения этого действия", "Отказано!", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        return;
+                    }
+                    MessageBoxResult result = MessageBox.Show("Вы уверены что хотите удалить запись?", "Удаление", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                    if (result == MessageBoxResult.No)
+                        return;
+
+                    switch (TabIndex)
                     {
                         case 0:
-                            DownBilletVM VM = new DownBilletVM();
-                            CorentPage = new DownBilletPage(VM);
-                            CorentPage.Visibility = Visibility.Visible;
+                            if(DownBillet == null)
+                                break;
+                            using (var context = new UserDbContext())
+                            {
+                                var el = context.DownBillets.Find(DownBillet.Id);
+                                context.DownBillets.Remove(el);
+                                context.SaveChanges();
+                            }
                             break;
                         case 1:
-                            CorentPage = new UpBilletPage(new UpBilletVM());
-                            CorentPage.Visibility = Visibility.Visible;
+                            if (UpBillet == null)
+                                break;
+                            using (var context = new UserDbContext())
+                            {
+                                var el = context.UpBillets.Find(UpBillet.Id);
+                                context.UpBillets.Remove(el);
+                                context.SaveChanges();
+                            }
                             break;
                         case 2:
-                            CorentPage = new InsolePage(new InsoleVM());
-                            CorentPage.Visibility = Visibility.Visible;
+                            if (Insole == null)
+                                break;
+                            using (var context = new UserDbContext())
+                            {
+                                var el = context.Insole.Find(Insole.Id);
+                                context.Insole.Remove(el);
+                                context.SaveChanges();
+                            }
                             break;
                         case 3:
-                            CorentPage = new PatternPage(new PatternVM());
-                            CorentPage.Visibility = Visibility.Visible;
+                            if (Pattern == null)
+                                break;
+                            using (var context = new UserDbContext())
+                            {
+                                var el = context.Patterns.Find(Pattern.Id);
+                                context.Patterns.Remove(el);
+                                context.SaveChanges();
+                            }
                             break;
                         case 4:
-                            CorentPage = new ShoeTreePage(new ShoeTreeVM());
-                            CorentPage.Visibility = Visibility.Visible;
+                            if (ShoeTree == null)
+                                break;
+                            using (var context = new UserDbContext())
+                            {
+                                var el = context.ShoeTrees.Find(ShoeTree.Id);
+                                context.ShoeTrees.Remove(el);
+                                context.SaveChanges();
+                            }
                             break;
                         case 5:
-                            CorentPage = new SolePage(new SoleVM());
-                            CorentPage.Visibility = Visibility.Visible;
+                            if (Sole == null)
+                                break;
+                            using (var context = new UserDbContext())
+                            {
+                                var el = context.Soles.Find(Sole.Id);
+                                context.Soles.Remove(el);
+                                context.SaveChanges();
+                            }
                             break;
                         default:
-                            BackButtonVisibility = Visibility.Collapsed;
-                            CorentPage.Visibility = Visibility.Collapsed;
                             break;
                     }
+                    OnDateUpdate(EventArgs.Empty);
                 });
             }
         }
