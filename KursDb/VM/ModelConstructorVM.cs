@@ -13,11 +13,20 @@ using System.Windows.Input;
 
 namespace KursDb.VM
 {
+    public class FullInfoFittingsInModel
+    {
+        public int Id { get; set; }
+        public string Type { get; set; }
+        public int Price { get; set; }
+        public int Count { get; set; }
+    }
+
     public class ModelConstructorVM : ViewModelBase
     {
         public ModelConstructorVM()
         {
             BackButtonVisibility = Visibility.Collapsed;
+            FittingInModelList = new List<FullInfoFittingsInModel>();
         }
 
         public event EventHandler DateUpdate;
@@ -32,44 +41,6 @@ namespace KursDb.VM
             get { return GetValue<Page>("CorentPage"); }
             set { SetValue(value, "CorentPage"); }
         }
-
-        #region Main Parametrs
-        public DownBillet DownBillet
-        {
-            get { return GetValue<DownBillet>("DownBillet"); }
-            set { SetValue(value, "DownBillet"); }
-        }
-
-        public Insole Insole
-        {
-            get { return GetValue<Insole>("Insole"); }
-            set { SetValue(value, "Insole"); }
-        }
-
-        public Pattern Pattern
-        {
-            get { return GetValue<Pattern>("Pattern"); }
-            set { SetValue(value, "Pattern"); }
-        }
-
-        public ShoeTree ShoeTree
-        {
-            get { return GetValue<ShoeTree>("ShoeTree"); }
-            set { SetValue(value, "ShoeTree"); }
-        }
-
-        public Sole Sole
-        {
-            get { return GetValue<Sole>("Sole"); }
-            set { SetValue(value, "Sole"); }
-        }
-
-        public UpBillet UpBillet
-        {
-            get { return GetValue<UpBillet>("UpBillet"); }
-            set { SetValue(value, "UpBillet"); }
-        }
-        #endregion Main Parametrs
 
         public int TabIndex
         {
@@ -86,12 +57,13 @@ namespace KursDb.VM
         public int Size
         {
             get { return GetValue<int>("Size"); }
-            set 
-            { 
-                OnDateUpdate(EventArgs.Empty); 
-                SetValue(value, "Size"); 
+            set
+            {
+                OnDateUpdate(EventArgs.Empty);
+                SetValue(value, "Size");
             }
         }
+
         public int SelectedSex
         {
             get
@@ -128,7 +100,46 @@ namespace KursDb.VM
                 OnDateUpdate(EventArgs.Empty);
             }
         }
+
         public string Sex { get; set; }
+
+        #region Main Parametrs
+        public DownBillet DownBillet
+        {
+            get { return GetValue<DownBillet>("DownBillet"); }
+            set { SetValue(value, "DownBillet"); }
+        }
+        public Insole Insole
+        {
+            get { return GetValue<Insole>("Insole"); }
+            set { SetValue(value, "Insole"); }
+        }
+        public Pattern Pattern
+        {
+            get { return GetValue<Pattern>("Pattern"); }
+            set { SetValue(value, "Pattern"); }
+        }
+        public ShoeTree ShoeTree
+        {
+            get { return GetValue<ShoeTree>("ShoeTree"); }
+            set { SetValue(value, "ShoeTree"); }
+        }
+        public Sole Sole
+        {
+            get { return GetValue<Sole>("Sole"); }
+            set { SetValue(value, "Sole"); }
+        }
+        public UpBillet UpBillet
+        {
+            get { return GetValue<UpBillet>("UpBillet"); }
+            set { SetValue(value, "UpBillet"); }
+        }
+        public Fitting Fitting
+        {
+            get { return GetValue<Fitting>("Fitting"); }
+            set { SetValue(value, "Fitting"); }
+        }        
+        #endregion Main Parametrs
 
         #region MainLists
         public List<DownBillet> DownBilletList 
@@ -197,8 +208,59 @@ namespace KursDb.VM
                 }
             }
         }
+        public List<Fitting> FittingList
+        {
+            get
+            {
+                using (var context = new UserDbContext())
+                {
+                    context.Fittings.Load();
+                    return context.Fittings.Local.ToList();
+                }
+            }
+        }
+
+        public List<FullInfoFittingsInModel> FittingInModelList { get; set; }
         #endregion MainList
 
+        public ICommand AddFittingInModelClick
+        {
+            get
+            {
+                return new DelegateCommand(() =>
+                {
+                    if (Fitting == null)
+                    {
+                        MessageBox.Show("Выберете поле для добавления");
+                        return;
+                    }                       
+
+                    var dyalog_window = new CountDialog();
+                    if (!dyalog_window.ShowDialog().Value)
+                        return;
+
+                    var el = new FullInfoFittingsInModel();
+                    el.Id = Fitting.Id;
+                    el.Price = Fitting.Price;
+                    el.Type = Fitting.Type;
+                    el.Count = dyalog_window.Count;
+                    FittingInModelList.Add(el);
+                    OnDateUpdate(EventArgs.Empty);
+                });
+            }
+        }
+        public ICommand DeleteFittingInModelClick
+        {
+            get
+            {
+                return new DelegateCommand(() =>
+                {
+                    CorentPage.Visibility = Visibility.Collapsed;
+                    BackButtonVisibility = Visibility.Collapsed;
+                    OnDateUpdate(EventArgs.Empty);
+                });
+            }
+        }
         public ICommand BackClick
         {
             get
@@ -258,6 +320,9 @@ namespace KursDb.VM
                         case 5:
                             StartCorentAddPage(new SolePage(new SoleVM()));
                             break;
+                        case 6:
+                            StartCorentAddPage(new FittingsPage(new FittingsVM()));
+                            break;
                         default:
                             BackButtonVisibility = Visibility.Collapsed;
                             CorentPage.Visibility = Visibility.Collapsed;
@@ -298,6 +363,9 @@ namespace KursDb.VM
                             break;
                         case 5:
                             StartCorentModPage(new SolePage(new SoleVM(Sole)), Sole != null);
+                            break;
+                        case 6:
+                            StartCorentModPage(new FittingsPage(new FittingsVM(Fitting)), Fitting != null);
                             break;
                         default:
                             BackButtonVisibility = Visibility.Collapsed;
@@ -385,6 +453,16 @@ namespace KursDb.VM
                                 context.SaveChanges();
                             }
                             break;
+                        case 6:
+                            if (Fitting == null)
+                                break;
+                            using (var context = new UserDbContext())
+                            {
+                                var el = context.Fittings.Find(Fitting.Id);
+                                context.Fittings.Remove(el);
+                                context.SaveChanges();
+                            }
+                            break;
                         default:
                             break;
                     }
@@ -392,6 +470,5 @@ namespace KursDb.VM
                 });
             }
         }
-
     }
 }

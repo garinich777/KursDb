@@ -52,7 +52,7 @@ namespace KursDb.VM
 
                         context.DownBillets.Add(down_billet);
                         context.SaveChanges();
-                        MessageBox.Show("Запись успешно добавлена", "Ура!", MessageBoxButton.OK, MessageBoxImage.Information);
+                        MessageBox.Show("Запись добавлена");
                     }
                 });
             }

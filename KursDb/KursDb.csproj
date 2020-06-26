@@ -71,6 +71,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="View\CountDialog.xaml.cs">
+      <DependentUpon>CountDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\FittingsPage.xaml.cs">
       <DependentUpon>FittingsPage.xaml</DependentUpon>
     </Compile>
@@ -106,6 +109,10 @@
     <Compile Include="VM\ShoeTreeVM.cs" />
     <Compile Include="VM\SoleVM.cs" />
     <Compile Include="VM\UpBilletVM.cs" />
+    <Page Include="View\CountDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\DownBilletPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

@@ -8,6 +8,7 @@ namespace KursDb.VM
 {
     public class FittingsVM : ViewModelBase
     {
+        public int Id { get; set; }
         public string Type { get; set; }
         public int Price { get; set; }
 
@@ -18,10 +19,16 @@ namespace KursDb.VM
             IsHaveValues = false;
         }
 
-        public FittingsVM(Fitting down_billet)
+        public FittingsVM(Fitting el)
         {
-            Type = down_billet.Type;
-            Price = down_billet.Price;
+            if (el == null)
+            {
+                IsHaveValues = false;
+                return;
+            }
+            Id = el.Id;
+            Type = el.Type;
+            Price = el.Price;
             IsHaveValues = true;
         }
 
@@ -55,13 +62,7 @@ namespace KursDb.VM
                 {
                     using (var context = new UserDbContext())
                     {
-                        var fitting = new Fitting()
-                        {
-                            Type = Type,
-                            Price = Price,
-                        };
-
-                        fitting = context.Fittings.Find(fitting.Id);
+                        var fitting = context.Fittings.Find(Id);
 
                         fitting.Type = Type;
                         fitting.Price = Price;
