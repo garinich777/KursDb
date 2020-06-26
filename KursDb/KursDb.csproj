@@ -208,9 +208,14 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <Resource Include="08-06-2020 14-56-45.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="View\minus.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="View\plus.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

@@ -18,7 +18,7 @@
             <ComboBox SelectedIndex="{Binding SelectedSex}" Margin="0 5 0 0" Focusable="False">
                 <TextBlock Text="Мужские"/>
                 <TextBlock Text="Женские"/>
-                <TextBlock Text="Детские"/> 
+                <TextBlock Text="Детские"/>
             </ComboBox>
             <Label Content="Размер:"  Margin="5 5 0 0"/>
             <TextBox Text="{Binding Size}" HorizontalContentAlignment="Center" Margin="0 5 5 0" Width="60"/>
@@ -95,6 +95,51 @@
             <TabItem Header="Подошва">
                 <Grid Background="#FFE5E5E5">
                     <DataGrid x:Name="dg_sole" SelectionMode="Single" ItemsSource="{Binding SoleList}" SelectedItem="{Binding Sole}" IsReadOnly="True" AutoGenerateColumns="False">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Артикул" Binding="{Binding Path=Id}"/>
+                            <DataGridTextColumn Header="Пол" Binding="{Binding Path=Sex}"/>
+                            <DataGridTextColumn Header="Размер" Binding="{Binding Path=Size}"/>
+                            <DataGridTextColumn Header="Тип" Binding="{Binding Path=Type}"/>
+                            <DataGridTextColumn Header="Цена за пару" Binding="{Binding Path=Price}"/>
+                            <DataGridTextColumn Header="Сезон" Binding="{Binding Path=Season}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Фурнитура">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="50"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <Button Grid.Column="1" Grid.Row="1" Style="{StaticResource PlusButton}">
+                        <Image Source="plus.png" Height="32" Width="32"/>
+                    </Button>
+
+                    <Button Grid.Column="1" Grid.Row="2" Style="{StaticResource MinusButton}">
+                        <Image Source="minus.png" Height="32" Width="32"/>
+                    </Button>
+
+                    <Label Content="Имеющиеся фурнитуры" Margin="0"/>
+                    <Label Content="Фурнитуры модели" Grid.Column="2" Margin="0"/>
+                    <DataGrid x:Name="dg_fittings" Grid.Column="0" Grid.Row="1" SelectionMode="Single" ItemsSource="{Binding SoleList}" SelectedItem="{Binding Sole}" IsReadOnly="True" AutoGenerateColumns="False" Grid.RowSpan="2">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Артикул" Binding="{Binding Path=Id}"/>
+                            <DataGridTextColumn Header="Пол" Binding="{Binding Path=Sex}"/>
+                            <DataGridTextColumn Header="Размер" Binding="{Binding Path=Size}"/>
+                            <DataGridTextColumn Header="Тип" Binding="{Binding Path=Type}"/>
+                            <DataGridTextColumn Header="Цена за пару" Binding="{Binding Path=Price}"/>
+                            <DataGridTextColumn Header="Сезон" Binding="{Binding Path=Season}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <DataGrid x:Name="dg_fittings_added" Grid.Column="2" Grid.Row="1" SelectionMode="Single" ItemsSource="{Binding SoleList}" SelectedItem="{Binding Sole}" IsReadOnly="True" AutoGenerateColumns="False" Grid.RowSpan="2">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Артикул" Binding="{Binding Path=Id}"/>
                             <DataGridTextColumn Header="Пол" Binding="{Binding Path=Sex}"/>

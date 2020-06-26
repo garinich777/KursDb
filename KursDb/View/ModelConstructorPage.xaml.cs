@@ -13,5 +13,10 @@ namespace KursDb.View
             InitializeComponent();
             DataContext = VM;
         }
+
+        private void Frame_Navigated(object sender, System.Windows.Navigation.NavigationEventArgs e)
+        {
+
+        }
     }
 }
