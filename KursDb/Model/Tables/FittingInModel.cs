@@ -7,8 +7,8 @@ namespace KursDb.Model.Tables
     {
         [Key]
         [Column(Order = 1)]
-        public int FittingIdId { get; set; }
-        public virtual Order Order { get; set; }
+        public int FittingId { get; set; }
+        public virtual Fitting Fitting { get; set; }
 
         [Key]
         [Column(Order = 2)]

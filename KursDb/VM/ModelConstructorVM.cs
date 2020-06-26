@@ -476,5 +476,54 @@ namespace KursDb.VM
                 });
             }
         }
+
+        public ICommand CreateModel
+        {
+            get
+            {
+                return new DelegateCommand(() =>
+                {
+                    try
+                    {
+                        using (var context = new UserDbContext())
+                        {
+                            ShoeModel model = new ShoeModel();
+                            model.ShoeTreeId = ShoeTree.Id;
+                            model.DownBilletId = DownBillet.Id;
+                            model.InsoleId = Insole.Id;
+                            model.PatternId = Pattern.Id;
+                            model.SoleId = Sole.Id;
+                            model.UpBilletId = UpBillet.Id;
+                            model.Size = Size;
+                            model.Sex = Sex;
+
+                            context.ShoeModels.Add(model);
+                            context.SaveChanges();
+
+                            int model_id = model.Id;
+
+                            foreach (var item in FittingInModelList)
+                            {
+                                context.FittingsInModel.Add(new FittingInModel()
+                                {
+                                    FittingId = item.Id,
+                                    Count = item.Count,
+                                    ModelId = model_id
+                                });
+                            }
+                            context.SaveChanges();
+                            MessageBox.Show("Модель успешно создана");
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                        if(e.Message == "Ссылка на объект не указывает на экземпляр объекта.")
+                            MessageBox.Show("Выберете все компоненты модели");
+                        else
+                            MessageBox.Show(e.Message);
+                    }
+                });
+            }
+        }
     }
 }

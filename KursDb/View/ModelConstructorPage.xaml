@@ -27,7 +27,7 @@
             <Button Content="Удалить" Command="{Binding DeleteClick}" Height="35" Width="120" Margin="3 3 3 0" Style="{StaticResource RedButton}"/>
             <Button Content="Изменить" Command="{Binding ModPageClick}" Height="35" Width="120" Margin="3 3 3 0" Style="{StaticResource RedButton}"/>
             <Button Content="Добавить" Command="{Binding AddPageClick}" Height="35" Width="120" Margin="3 3 3 0"/>
-            <Button Content="Далее" Height="35" Width="120" Margin="3 3 3 0"/>
+            <Button Content="Далее" Command="{Binding CreateModel}" Height="35" Width="120" Margin="3 3 3 0"/>
         </DockPanel>
 
         <TabControl x:Name="tc_tabs" Margin="0 45 0 0" FontSize="16" SelectedIndex="{Binding TabIndex}" Focusable="False">
