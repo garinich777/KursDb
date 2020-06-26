@@ -138,7 +138,12 @@ namespace KursDb.VM
         {
             get { return GetValue<Fitting>("Fitting"); }
             set { SetValue(value, "Fitting"); }
-        }        
+        }
+        public FullInfoFittingsInModel FittingsInModel
+        {
+            get { return GetValue<FullInfoFittingsInModel>("FittingsInModel"); }
+            set { SetValue(value, "FittingsInModel"); }
+        }
         #endregion Main Parametrs
 
         #region MainLists
@@ -255,9 +260,10 @@ namespace KursDb.VM
             {
                 return new DelegateCommand(() =>
                 {
-                    CorentPage.Visibility = Visibility.Collapsed;
-                    BackButtonVisibility = Visibility.Collapsed;
-                    OnDateUpdate(EventArgs.Empty);
+                    if(!FittingInModelList.Remove(FittingsInModel))
+                        MessageBox.Show("Выберете поле для удаления");
+                    else
+                        OnDateUpdate(EventArgs.Empty);
                 });
             }
         }

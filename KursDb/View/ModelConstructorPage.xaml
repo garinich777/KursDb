@@ -123,7 +123,7 @@
                         <Image Source="plus.png" Height="32" Width="32"/>
                     </Button>
 
-                    <Button Grid.Column="1" Grid.Row="2" Style="{StaticResource MinusButton}">
+                    <Button Command="{Binding DeleteFittingInModelClick}" Grid.Column="1" Grid.Row="2" Style="{StaticResource MinusButton}">
                         <Image Source="minus.png" Height="32" Width="32"/>
                     </Button>
 
@@ -136,7 +136,7 @@
                             <DataGridTextColumn Header="Цена за штуку" Binding="{Binding Path=Price}"/>
                         </DataGrid.Columns>
                     </DataGrid>
-                    <DataGrid x:Name="dg_fittings_added" Grid.Column="2" Grid.Row="1" SelectionMode="Single" ItemsSource="{Binding FittingInModelList}" IsReadOnly="True" AutoGenerateColumns="False" Grid.RowSpan="2">
+                    <DataGrid x:Name="dg_fittings_added" Grid.Column="2" Grid.Row="1" SelectionMode="Single" ItemsSource="{Binding FittingInModelList}" SelectedItem="{Binding FittingsInModel}" IsReadOnly="True" AutoGenerateColumns="False" Grid.RowSpan="2">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Артикул" Binding="{Binding Path=Id}"/>
                             <DataGridTextColumn Header="Тип" Binding="{Binding Path=Type}"/>
