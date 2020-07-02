@@ -83,11 +83,11 @@
     <Compile Include="View\ModelConstructorPage.xaml.cs">
       <DependentUpon>ModelConstructorPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\ModelViewPage.xaml.cs">
+      <DependentUpon>ModelViewPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\PatternPage.xaml.cs">
       <DependentUpon>PatternPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\ShoeModelPage.xaml.cs">
-      <DependentUpon>ShoeModelPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\ShoeTreePage.xaml.cs">
       <DependentUpon>ShoeTreePage.xaml</DependentUpon>
@@ -103,6 +103,8 @@
     <Compile Include="VM\InsoleVM.cs" />
     <Compile Include="VM\MainVM.cs" />
     <Compile Include="VM\ModelConstructorVM.cs" />
+    <Compile Include="VM\ModelViewProp.cs" />
+    <Compile Include="VM\ModelViewVM.cs" />
     <Compile Include="VM\PatternVM.cs" />
     <Compile Include="VM\SeasonEnum.cs" />
     <Compile Include="VM\SexEnum.cs" />
@@ -163,15 +165,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\ModelViewPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\PatternPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Resources\Default.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\ShoeModelPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

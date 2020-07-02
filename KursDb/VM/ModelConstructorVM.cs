@@ -485,6 +485,9 @@ namespace KursDb.VM
                 {
                     try
                     {
+                        MessageBoxResult result = MessageBox.Show("Вы уверены что хотите добавить новую модель?", "Создание модели", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                        if (result == MessageBoxResult.No)
+                            return;
                         using (var context = new UserDbContext())
                         {
                             ShoeModel model = new ShoeModel();

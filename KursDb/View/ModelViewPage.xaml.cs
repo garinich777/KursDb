@@ -1,4 +1,5 @@
-﻿using System;
+﻿using KursDb.VM;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,13 +17,14 @@ using System.Windows.Shapes;
 namespace KursDb.View
 {
     /// <summary>
-    /// Логика взаимодействия для ShoeModelPage.xaml
+    /// Логика взаимодействия для ModelViewPage.xaml
     /// </summary>
-    public partial class ShoeModelPage : Page
+    public partial class ModelViewPage : Page
     {
-        public ShoeModelPage()
+        public ModelViewPage(ModelViewVM VM)
         {
             InitializeComponent();
+            DataContext = VM;
         }
     }
 }

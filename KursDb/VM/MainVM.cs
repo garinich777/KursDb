@@ -50,5 +50,17 @@ namespace KursDb.VM
                 });
             }
         }
+
+        public ICommand ModelViewPageClick
+        {
+            get
+            {
+                return new DelegateCommand(() =>
+                {
+                    var VM = new ModelViewVM();
+                    CorentPage = new ModelViewPage(VM);
+                });
+            }
+        }
     }
 }

@@ -38,6 +38,7 @@
         <Border BorderBrush="Gray" BorderThickness="1"/>
         <StackPanel>
             <Button Content="Конструктор модели" Command="{Binding ModelConstructorPageClick}" Visibility="{Binding ModelConstVisibility}"/>
+            <Button Content="Просмотр моделей" Command="{Binding ModelViewPageClick}" Visibility="{Binding ModelConstVisibility}"/>
             <Button Content="Оформить заказ" Visibility="{Binding OrderVisibility}"/>
             <Button Content="Отчеты"/>
         </StackPanel>
