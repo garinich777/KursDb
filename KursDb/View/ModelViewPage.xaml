@@ -10,7 +10,7 @@
 
     <Grid Background="White">
         <Button Content="Удалить" Command="{Binding DeleatModelClick}" Style="{StaticResource RedButton}" HorizontalAlignment="Right" Margin="5" VerticalAlignment="Top"/>
-        <DataGrid x:Name="dg_down_billet" SelectionMode="Single" Margin="0 50 0 0" ItemsSource="{Binding ModelPropList}" SelectedItem="{Binding ModelViewProp}" IsReadOnly="True" AutoGenerateColumns="False">
+        <DataGrid SelectionMode="Single" Margin="0 50 0 0" ItemsSource="{Binding ModelPropList}" SelectedItem="{Binding ModelViewProp}" IsReadOnly="True" AutoGenerateColumns="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Артикул" Binding="{Binding Path=Id}"/>
                 <DataGridTextColumn Header="Размер" Binding="{Binding Path=Size}"/>

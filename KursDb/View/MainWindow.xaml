@@ -39,7 +39,7 @@
         <StackPanel>
             <Button Content="Конструктор модели" Command="{Binding ModelConstructorPageClick}" Visibility="{Binding ModelConstVisibility}"/>
             <Button Content="Просмотр моделей" Command="{Binding ModelViewPageClick}" Visibility="{Binding ModelConstVisibility}"/>
-            <Button Content="Оформить заказ" Visibility="{Binding OrderVisibility}"/>
+            <Button Content="Оформить заказ" Command="{Binding OrderPageClick}" Visibility="{Binding OrderVisibility}"/>
             <Button Content="Отчеты"/>
         </StackPanel>
         <Button Content="Выход" VerticalAlignment="Bottom" Style="{StaticResource RedButton}" Click="ExitClick"/>

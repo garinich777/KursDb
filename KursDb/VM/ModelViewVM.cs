@@ -1,6 +1,8 @@
 ﻿using DevExpress.Mvvm;
 using KursDb.Model;
+using KursDb.Model.Tables;
 using KursDb.Properties;
+using KursDb.View;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -12,9 +14,30 @@ using System.Windows.Input;
 
 namespace KursDb.VM
 {
+    public class FullModelViewProp
+    {
+        public int Id { get; set; }
+        public int Size { get; set; }
+        public string Sex { get; set; }
+        public string Season { get; set; }
+        public string UpMat { get; set; }
+        public string DownMat { get; set; }
+        public int Price { get; set; }
+        public int LaborCosts { get; set; }
+        public int Count { get; set; }
+    }
+
     public class ModelViewVM : ViewModelBase
     {
+        public event EventHandler DateUpdate;
+        protected virtual void OnDateUpdate(EventArgs e)
+        {
+            EventHandler handler = DateUpdate;
+            handler?.Invoke(this, e);
+        }
+
         public List<ModelViewProp> ModelPropList { get; set; }
+        public List<FullModelViewProp> FullModelPropList { get; set; }
 
         public ModelViewProp ModelViewProp
         {
@@ -22,9 +45,22 @@ namespace KursDb.VM
             set { SetValue(value, "ModelViewProp"); }
         }
 
+        public FullModelViewProp FullModelViewProp
+        {
+            get { return GetValue<FullModelViewProp>("FullModelViewProp"); }
+            set { SetValue(value, "FullModelViewProp"); }
+        }
+
+        public int PriceCoefficient
+        {
+            get { return GetValue<int>("PriceCoefficient"); }
+            set { SetValue(value, "PriceCoefficient"); }
+        }
+
         public ModelViewVM()
         {
             ModelPropList = new List<ModelViewProp>();
+            FullModelPropList = new List<FullModelViewProp>();
             using (var context = new UserDbContext())
             {
                 context.ShoeModels.Load();
@@ -76,9 +112,101 @@ namespace KursDb.VM
                         context.ShoeModels.Remove(el);
                         context.SaveChanges();
                     }
+                    OnDateUpdate(EventArgs.Empty);
                 });
             }
         }
 
+        public ICommand AddModelInOrderClick
+        {
+            get
+            {
+                return new DelegateCommand(() =>
+                {
+                    if (ModelViewProp == null)
+                    {
+                        MessageBox.Show("Выберете поле для добавления");
+                        return;
+                    }
+
+                    var dyalog_window = new CountDialog();
+                    if (!dyalog_window.ShowDialog().Value)
+                        return;
+
+                    var el = new FullModelViewProp
+                    {
+                        Id = ModelViewProp.Id,
+                        Price = ModelViewProp.Price,
+                        Count = dyalog_window.Count,
+                        DownMat = ModelViewProp.DownMat,
+                        UpMat = ModelViewProp.UpMat,
+                        LaborCosts = ModelViewProp.LaborCosts,
+                        Season = ModelViewProp.Season,
+                        Sex = ModelViewProp.Sex,
+                        Size = ModelViewProp.Size
+                    };
+                    FullModelPropList.Add(el);
+                    OnDateUpdate(EventArgs.Empty);
+                });
+            }
+        }
+
+        public ICommand DeleteModelInOrderClick
+        {
+            get
+            {
+                return new DelegateCommand(() =>
+                {
+                    if (!FullModelPropList.Remove(FullModelViewProp))
+                        MessageBox.Show("Выберете поле для удаления");
+                    else
+                        OnDateUpdate(EventArgs.Empty);
+                });
+            }
+        }
+
+        public ICommand СreateOrderClick
+        {
+            get
+            {
+                return new DelegateCommand(() =>
+                {
+                    using (var context = new UserDbContext())
+                    {
+                        int sum = 0;
+                        int hours_complet = 0;
+                        foreach (var item in FullModelPropList)
+                        {
+                            sum += item.Count * item.Price;
+                            hours_complet += item.Count * item.LaborCosts;
+                        }
+
+                        Order order = new Order
+                        {
+                            Date = DateTime.Now,
+                            Sum = (PriceCoefficient * sum / 100).ToString(),
+                            HoursComplet = hours_complet
+                        };
+
+                        context.Orders.Add(order);
+                        context.SaveChanges();
+
+                        int order_id = order.Id;
+
+                        foreach (var item in FullModelPropList)
+                        {
+                            context.ModelsInOrder.Add(new ModelInOrder()
+                            {
+                                OrderId = order_id,
+                                Count = item.Count,
+                                ModelId = item.Id
+                            });
+                        }
+                        context.SaveChanges();
+                        MessageBox.Show("Заказ успешно создан");
+                    }
+                });  
+            }
+        }
     }
 }

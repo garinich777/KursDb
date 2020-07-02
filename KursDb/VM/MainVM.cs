@@ -59,8 +59,23 @@ namespace KursDb.VM
                 {
                     var VM = new ModelViewVM();
                     CorentPage = new ModelViewPage(VM);
+                    VM.DateUpdate += (s, e) => CorentPage = new ModelViewPage(VM);
                 });
             }
         }
+
+        public ICommand OrderPageClick
+        {
+            get
+            {
+                return new DelegateCommand(() =>
+                {
+                    var VM = new ModelViewVM();
+                    CorentPage = new OrderPage(VM);
+                    VM.DateUpdate += (s, e) => CorentPage = new OrderPage(VM);
+                });
+            }
+        }
+
     }
 }
