@@ -15,8 +15,8 @@ using System.Windows.Input;
 
 namespace KursDb.VM
 {
-    enum Filter { Daily, Weekly, Monthly, Yearly, AllTime}
-    class OrderInfo
+    public enum Filter { Daily, Weekly, Monthly, Yearly, AllTime}
+    public class OrderInfo
     {
         public int Id { get; set; }
         public string Sum { get; set; }
@@ -44,7 +44,30 @@ namespace KursDb.VM
                 context.Orders.Load();
                 foreach (var item in context.Orders)
                 {
-                    
+                    DateTime date = DateTime.Now;
+                    switch (SelectedFilter)
+                    {
+                        case (int)Filter.Daily:
+                            date = date.Subtract(TimeSpan.FromDays(1.0));
+                            break;
+                        case (int)Filter.Weekly:
+                            date = date.Subtract(TimeSpan.FromDays(7.0));
+                            break;
+                        case (int)Filter.Monthly:
+                            date = date.Subtract(TimeSpan.FromDays(31.0));
+                            break;
+                        case (int)Filter.Yearly:
+                            date = date.Subtract(TimeSpan.FromDays(366.0));
+                            break;
+                        case (int)Filter.AllTime:
+                            date = DateTime.MinValue;
+                            break;
+                        default:
+                            date = DateTime.MinValue;
+                            break;
+                    }
+                    if (item.Date <= date)
+                        continue;
                     string models = string.Empty;
                     foreach (var item2 in context.ShoeModels)
                     {
@@ -68,6 +91,7 @@ namespace KursDb.VM
         public ReportVM()
         {
             Initialize();
+            SelectedFilter = (int)Filter.AllTime;
         }
 
         public int SelectedFilter
