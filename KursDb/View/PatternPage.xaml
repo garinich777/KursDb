@@ -14,14 +14,14 @@
             <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="180"/>
+            <ColumnDefinition Width="186"/>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="140"/>
         </Grid.ColumnDefinitions>
 
         <StackPanel>
             <Label Content="Сложность, человек/ч"/>
-            <Label Content="Площадь выкройки, м²"/>
+            <Label Content="Площадь выкройки, см²"/>
             <Label Content="Размер"/>
             <Label Content="Пол"/>
         </StackPanel>

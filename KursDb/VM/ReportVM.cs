@@ -73,7 +73,7 @@ namespace KursDb.VM
                     {
                         var model = context.ModelsInOrder.Find(item.Id, item2.Id);
                         if (model  != null)
-                            models += $"\"{item2.Id}\" x{model?.Count}| ";
+                            models += $"\"{item2.Id}\" x{model?.Count}|";
                     }
 
                     OrderList.Add(new OrderInfo

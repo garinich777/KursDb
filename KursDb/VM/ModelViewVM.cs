@@ -43,7 +43,7 @@ namespace KursDb.VM
                 context.ShoeModels.Load();           
                 foreach (var item in context.ShoeModels)
                 {
-                    int price = item.Pattern.Square * (item.DownBillet.Price + item.UpBillet.Price) + item.Insole.Price + item.Sole.Price;
+                    int price = (int)(item.Pattern.Square / 10000.0 * (item.DownBillet.Price + item.UpBillet.Price) + item.Insole.Price + item.Sole.Price);
                     if (MaxPrice > 0 && price > MaxPrice)
                         continue;
                     int labor_costs = item.Pattern.Сomplexity * (item.UpBillet.Density + item.DownBillet.Density);
@@ -129,6 +129,7 @@ namespace KursDb.VM
                         context.ShoeModels.Remove(el);
                         context.SaveChanges();
                     }
+                    Initialize();
                     OnDateUpdate(EventArgs.Empty);
                 });
             }
