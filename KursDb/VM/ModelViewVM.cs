@@ -29,6 +29,39 @@ namespace KursDb.VM
 
     public class ModelViewVM : ViewModelBase
     {
+        public ModelViewVM()
+        {
+            Initialize();
+            FullModelPropList = new List<FullModelViewProp>();
+        }
+
+        private void Initialize()
+        {
+            ModelPropList = new List<ModelViewProp>();
+            using (var context = new UserDbContext())
+            {
+                context.ShoeModels.Load();           
+                foreach (var item in context.ShoeModels)
+                {
+                    int price = item.Pattern.Square * (item.DownBillet.Price + item.UpBillet.Price) + item.Insole.Price + item.Sole.Price;
+                    if (MaxPrice > 0 && price > MaxPrice)
+                        continue;
+                    int labor_costs = item.Pattern.Сomplexity * (item.UpBillet.Density + item.DownBillet.Density);
+                    var model_prop = new ModelViewProp
+                    {
+                        Id = item.Id,
+                        DownMat = item.DownBillet.Material,
+                        UpMat = item.UpBillet.Material,
+                        Size = item.Size,
+                        Sex = item.Sex,
+                        Season = item.Sole.Season,
+                        Price = price,
+                        LaborCosts = labor_costs
+                    };
+                    ModelPropList.Add(model_prop);
+                }
+            }
+        }
         public event EventHandler DateUpdate;
         protected virtual void OnDateUpdate(EventArgs e)
         {
@@ -57,31 +90,15 @@ namespace KursDb.VM
             set { SetValue(value, "PriceCoefficient"); }
         }
 
-        public ModelViewVM()
+        public int MaxPrice
         {
-            ModelPropList = new List<ModelViewProp>();
-            FullModelPropList = new List<FullModelViewProp>();
-            using (var context = new UserDbContext())
+            get { return GetValue<int>("MaxPrice"); }
+            set
             {
-                context.ShoeModels.Load();
-                foreach (var item in context.ShoeModels)
-                {
-                    int price = item.Pattern.Square * (item.DownBillet.Price + item.UpBillet.Price) + item.Insole.Price + item.Sole.Price;
-                    int labor_costs = item.Pattern.Сomplexity * (item.UpBillet.Density + item.DownBillet.Density);
-                    var model_prop = new ModelViewProp 
-                    {
-                        Id = item.Id,
-                        DownMat = item.DownBillet.Material,
-                        UpMat = item.UpBillet.Material,
-                        Size = item.Size,
-                        Sex = item.Sex,
-                        Season = item.Sole.Season,
-                        Price = price,
-                        LaborCosts = labor_costs
-                    };
-                    ModelPropList.Add(model_prop);
-                }
-            }      
+                SetValue(value, "MaxPrice");
+                Initialize();
+                OnDateUpdate(EventArgs.Empty);                
+            }
         }
 
         public ICommand DeleatModelClick
