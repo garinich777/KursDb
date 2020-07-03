@@ -2,6 +2,7 @@
 using KursDb.Properties;
 using KursDb.View;
 using System;
+using System.Dynamic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -77,5 +78,17 @@ namespace KursDb.VM
             }
         }
 
+        public ICommand ReportPageClick
+        {
+            get
+            {
+                return new DelegateCommand(() =>
+                {
+                    var VM = new ReportVM();
+                    CorentPage = new ReportPage(VM);
+                    VM.DateUpdate += (s, e) => CorentPage = new ReportPage(VM);
+                });
+            }
+        }
     }
 }
