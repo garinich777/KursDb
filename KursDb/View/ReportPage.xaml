@@ -18,7 +18,7 @@
                 <TextBlock Text="За все время"/>
             </ComboBox>
             <Button Content="Удалить заказ" Command="{Binding DeleatOrderClick}" Margin="5"  HorizontalAlignment="Right" Style="{StaticResource RedButton}"/>
-            <Button Content="Оформить отчет"  Margin="5" HorizontalAlignment="Right"/>
+            <Button Content="Оформить отчет" Command="{Binding GetReport}" Margin="5" HorizontalAlignment="Right"/>
         </DockPanel>
         <DataGrid SelectionMode="Single" Margin="0 50 0 0" ItemsSource="{Binding OrderList}" SelectedItem="{Binding Order}" IsReadOnly="True" AutoGenerateColumns="False">
             <DataGrid.Columns>

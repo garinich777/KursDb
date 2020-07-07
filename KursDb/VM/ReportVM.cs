@@ -45,21 +45,21 @@ namespace KursDb.VM
                 foreach (var item in context.Orders)
                 {
                     DateTime date = DateTime.Now;
-                    switch (SelectedFilter)
+                    switch ((Filter)SelectedFilter)
                     {
-                        case (int)Filter.Daily:
+                        case Filter.Daily:
                             date = date.Subtract(TimeSpan.FromDays(1.0));
                             break;
-                        case (int)Filter.Weekly:
+                        case Filter.Weekly:
                             date = date.Subtract(TimeSpan.FromDays(7.0));
                             break;
-                        case (int)Filter.Monthly:
+                        case Filter.Monthly:
                             date = date.Subtract(TimeSpan.FromDays(31.0));
                             break;
-                        case (int)Filter.Yearly:
+                        case Filter.Yearly:
                             date = date.Subtract(TimeSpan.FromDays(366.0));
                             break;
-                        case (int)Filter.AllTime:
+                        case Filter.AllTime:
                             date = DateTime.MinValue;
                             break;
                         default:
@@ -68,6 +68,7 @@ namespace KursDb.VM
                     }
                     if (item.Date <= date)
                         continue;
+
                     string models = string.Empty;
                     foreach (var item2 in context.ShoeModels)
                     {
@@ -141,6 +142,17 @@ namespace KursDb.VM
                     }
                     Initialize();
                     OnDateUpdate(EventArgs.Empty);
+                });
+            }
+        }
+
+        public ICommand GetReport
+        {
+            get
+            {
+                return new DelegateCommand(() =>
+                {
+                    ExcelReport.Report(OrderList, (Filter)SelectedFilter);
                 });
             }
         }
