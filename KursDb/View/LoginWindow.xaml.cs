@@ -22,22 +22,38 @@ namespace KursDb.View
             Settings.Default.OrderPermission = true;
             Settings.Default.AdminPermission = false;
 
+            string error_message = "Неправильный логин или пароль";
             switch (login)
             {
                 case "1":
+                    if(password != "1")
+                    {
+                        MessageBox.Show(error_message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return;
+                    }
                     MessageBox.Show("Включен режим администратора!", "Опасно!", MessageBoxButton.OK, MessageBoxImage.Warning);
                     Settings.Default.AdminPermission = true;
                     break;
                 case "2":
+                    if (password != "2")
+                    {
+                        MessageBox.Show(error_message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return;
+                    }
                     Settings.Default.ModelConstPermission = true;
                     Settings.Default.OrderPermission = false;
                     break;
                 case "3":
+                    if (password != "3")
+                    {
+                        MessageBox.Show(error_message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return;
+                    }
                     Settings.Default.ModelConstPermission = false;
                     Settings.Default.OrderPermission = true;
                     break;
                 default:
-                    MessageBox.Show("Неправильный логин или пароль", "Ошибка", MessageBoxButton.OK,MessageBoxImage.Error);
+                    MessageBox.Show(error_message, "Ошибка", MessageBoxButton.OK,MessageBoxImage.Error);
                     return;
             }
             new MainWindow().Show();
